@@ -199,3 +199,69 @@ nav {
     padding: 4em 2em;
   }
 }
+
+.card {
+  display: flex;
+  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+  border-radius: 10px;
+  padding: 1em 2em;
+  margin: 2em 0;
+  .content-wrapper {
+    flex: 1 1 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    .block {
+      color: $dark-blue;
+      span {
+        font-size: 0.8rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+      margin: 0.5em 0;
+    }
+  }
+
+  .arrows {
+    flex: 1 1 20%;
+
+    .vote {
+      display: flex;
+      place-content: center;
+      .upvote {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        svg {
+          font-size: 70px;
+          color: green;
+        }
+      }
+
+      .downvote {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        svg {
+          font-size: 70px;
+          color: red;
+        }
+      }
+    }
+
+    .email {
+      width: 100%;
+      place-content: center;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      svg {
+        font-size: 30px;
+        color: orange;
+        margin-right: 0.6em;
+      }
+    }
+  }
+}
