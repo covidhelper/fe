@@ -70,6 +70,10 @@ nav {
         transform: scaleX(1);
       }
     }
+
+    .active::before {
+      transform: scaleX(1);
+    }
   }
 
   @media (max-width: 1120px) {

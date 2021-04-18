@@ -1,53 +1,52 @@
 import { ArrowDropDown, ArrowDropUp, Mail } from '@material-ui/icons';
 import React from 'react';
 
-const Card = () => {
-
+const Card = ({ name, email, phone, desc, state, city, type, addr, up, down, mail }) => {
   return (
     <div className="card">
         <div className="content-wrapper">
             <div className="block">
                 <span>Name</span>
-                <p>Atharva</p>
+                <p>{ name }</p>
             </div>
             <div className="block">
                 <span>Email</span>
-                <p>vrocias1@gmail.com</p>
+                <p>{ email }</p>
             </div>
             <div className="block">
                 <span>Phone</span>
-                <p>9370787273</p>
+                <p>{ phone }</p>
             </div>
             <div className="block">
                 <span>Description</span>
-                <p>I have 10 Oxygen Cylinders</p>
+                <p>{ desc }</p>
             </div>
             <div className="block">
                 <span>State</span>
-                <p>Maharashtra</p>
+                <p>{ state }</p>
             </div>
             <div className="block">
                 <span>City</span>
-                <p>Pune</p>
+                <p>{ city }</p>
             </div>
             <div className="block">
                 <span>Address</span>
-                <p>Greater Noida, Delhi</p>
+                <p>{ addr }</p>
             </div>
             <div className="block">
                 <span>Type</span>
-                <p>Oxygen Cylinders</p>
+                <p>{ type }</p>
             </div>
         </div>
         <div className="arrows">
             <div className="vote">
                 <div className="upvote">
                     <ArrowDropUp />
-                    100
+                    { up }
                 </div>
                 <div className="downvote">
                     <ArrowDropDown />
-                    20
+                    { down }
                 </div>
             </div>
             <div className="email">
