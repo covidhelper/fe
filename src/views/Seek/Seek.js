@@ -122,7 +122,7 @@ const Seek = () => {
         <div className="layout-wrapper">
             <div className="card-wrapper">
                 {
-                    uuid === undefined &&
+                    uuid === undefined ?
                     <>
                         <div className="tabs">
                             <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seeker</span>
@@ -146,6 +146,15 @@ const Seek = () => {
                                 />
                             </FormControl>
                         </div>
+                    </> :
+                    <>
+                    {
+                        cards && cards.map((c, ind) => {
+                            return (
+                                <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                            )
+                        })
+                    }
                     </>
                 }
                 {
@@ -155,17 +164,20 @@ const Seek = () => {
                     </div>
                 }
                 {
-                    seeker ?
-                    cards && cards.map((c, ind) => {
-                        return (
-                            !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
-                        )
-                    }) :
-                    cards && cards.map((c, ind) => {
-                        return (
-                            c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
-                        )
-                    })
+                    uuid === undefined ?
+                    (
+                        seeker ?
+                        cards && cards.map((c, ind) => {
+                            return (
+                                !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                            )
+                        }) :
+                        cards && cards.map((c, ind) => {
+                            return (
+                                c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                            )
+                        })
+                    ) : null
                 }
                 {
                     alert.isOpen &&

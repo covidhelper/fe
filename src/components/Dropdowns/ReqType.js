@@ -19,6 +19,7 @@ const ReqType = props => {
         {id: 'DR', name: "Doctor"},
         {id: 'TIFFIN', name: "Tiffin"},
         {id: 'HOME_CARE', name: "Home Care"},
+        {id: 'TOCILIZUMAB', name: "Tocilizumab"},
     ]
 
     return (
