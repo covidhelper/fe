@@ -6,14 +6,13 @@ import { FORM_FILL_STRUCTURED } from '../../utils/config';
 import CustomAlert from '../CustomAlert/CustomAlert';
 import Modal from './Modal';
 
-const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink, updateData }) => {
+const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink, updateCard }) => {
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
         type: 'error'
     })
 
-    
     const [openModal, setOpenModal] = useState(false)
     const [openComments, setOpenComments] = useState(false)
     const [action, setAction] = useState("")
@@ -57,7 +56,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                     type: 'success',
                     isOpen: true,
                 })
-                updateData(res.data.response.dataCard)
+                updateCard(res.data.response.dataCard)
             }
             else{
                 setAlert({
@@ -87,11 +86,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
             message: 'Link copied to clipboard!'
         })
     }
-
-    const onToggleComments = () => {
-
-    }
-
+    
   return (
     <div className="card">
         <div className="upperRow">

@@ -51,24 +51,46 @@ const Seek = () => {
     useEffect(() => {
         console.log(uuid);
         setLoading(true)
-        service.get(FORM_FILL_STRUCTURED)
-        .then(res => {
-            if(res.data.success){
-                setCards(res.data.response.dataCards)
-            }
-            else{
-                setAlert({
-                    ...alert,
-                    isOpen: true,
-                    message: res.data.message,
-                    type: 'error'
-                })
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-        .finally(() => setLoading(false))
+        if(uuid !== undefined){
+            service.get(`${FORM_FILL_STRUCTURED}/${uuid}`)
+            .then(res => {
+                if(res.data.success){
+                    setCards([res.data.response.dataCard])
+                }
+                else{
+                    setAlert({
+                        ...alert,
+                        isOpen: true,
+                        message: res.data.message,
+                        type: 'error'
+                    })
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => setLoading(false))
+        }
+        else{
+            service.get(`${FORM_FILL_STRUCTURED}`)
+            .then(res => {
+                if(res.data.success){
+                    setCards(res.data.response.dataCards)
+                }
+                else{
+                    setAlert({
+                        ...alert,
+                        isOpen: true,
+                        message: res.data.message,
+                        type: 'error'
+                    })
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            .finally(() => setLoading(false))
+        }
     }, [])
 
     useEffect(() => {
@@ -86,6 +108,7 @@ const Seek = () => {
     }, [params])
 
     const updateCard = data => {
+        console.log("Hello guys!")
         const id = data.uuid
         let cardCopy = cards;
         cardCopy = cardCopy.map(c => {
