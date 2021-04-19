@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8080/"
+export const BASE_URL = "https://covid19helpers.in/"
 
 // Data Upload
 export const FORM_FILL_UNSTRUCTURED = BASE_URL + "v1/data/unstructured" // POST
