@@ -67,7 +67,7 @@ const Seek = () => {
     useEffect(() => {
         if(!(params.state === "" && params.city === "" && params.type === "" && params.query === "")){
             setLoading(true)
-            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city}&state=${params.state}&requestType=${params.type}&q=${params.query}`)
+            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&state=${params.state ? params.state : 'null'}&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}`)
             .then(res => {
                 console.log(res);
             })
