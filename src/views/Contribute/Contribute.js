@@ -1,13 +1,20 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
 import React, { useState } from 'react'
+import CustomAlert from '../../components/CustomAlert/CustomAlert'
 import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
 import State from '../../components/Dropdowns/State'
-import FileUpload from './FIleUpload/FileUpload'
+import service from '../../utils/axiosConfig'
+import { FORM_FILL_STRUCTURED } from '../../utils/config'
 
 const Contribute = () => {
     const [uploadOpen, setUploadOpen] = useState(true)
+    const [alert, setAlert] = useState({
+        isOpen: false,
+        message: '',
+        type: 'error'
+    })
     const [formData, setFormData] = useState({
         name: '',
         city: '',
@@ -71,7 +78,41 @@ const Contribute = () => {
 
     const onFormSubmit = e => {
         e.preventDefault()
-        console.log(formData);
+        const payload = {
+            ...formData,
+            isGiver: formData.isGiver === "giver" ? true : false
+        }
+        service.post(FORM_FILL_STRUCTURED, payload)
+        .then(res => {
+            if(res.data.success){
+                setAlert({
+                    isOpen: true,
+                    message: "Data added successfully!",
+                    type: 'success'
+                })
+                setFormData({
+                    name: '',
+                    city: '',
+                    state: '',
+                    email: '',
+                    contacts: [{ phone: '', contactPerson: '' }],
+                    address: '',
+                    requestType: '',
+                    comment: '',
+                    isGiver: 'giver'
+                })
+            }
+            else{
+                setAlert({
+                    isOpen: true,
+                    message: res.data.message,
+                    type: 'error'
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     return (
@@ -173,6 +214,14 @@ const Contribute = () => {
                     </div>
                 }
             </div>
+            {
+                alert.isOpen &&
+                <CustomAlert
+                    isOpen={alert.isOpen}
+                    message={alert.message}
+                    type={alert.type}
+                />
+            }
         </div>
     )
 }

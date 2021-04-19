@@ -1,7 +1,8 @@
 export const BASE_URL = "http://localhost:8080/"
 
 // Data Upload
-export const FORM_FILL = BASE_URL + "v1/data/unstructured" // POST
+export const FORM_FILL_UNSTRUCTURED = BASE_URL + "v1/data/unstructured" // POST
+export const FORM_FILL_STRUCTURED = BASE_URL + "v1/data/structured" // POST
 export const FILE_UPLOAD = BASE_URL + "v1/data/file" // POST
 
 //Data Display
