@@ -9,7 +9,7 @@ import service from '../../utils/axiosConfig'
 import { FORM_FILL_STRUCTURED } from '../../utils/config'
 
 const Contribute = () => {
-    const [uploadOpen, setUploadOpen] = useState(true)
+    const [structuredFormOpen, setStructuredFormOpen] = useState(true)
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
@@ -73,7 +73,6 @@ const Contribute = () => {
 
     const onFileUpload = e => {
         e.preventDefault()
-
     }
 
     const onFormSubmit = e => {
@@ -85,11 +84,20 @@ const Contribute = () => {
         service.post(FORM_FILL_STRUCTURED, payload)
         .then(res => {
             if(res.data.success){
-                setAlert({
-                    isOpen: true,
-                    message: "Data added successfully!",
-                    type: 'success'
-                })
+                if(res.data.response.isSave){
+                    setAlert({
+                        isOpen: true,
+                        message: "Data added successfully!",
+                        type: 'success'
+                    })
+                }
+                else{
+                    setAlert({
+                        isOpen: true,
+                        message: "Data already present!",
+                        type: 'error'
+                    })
+                }
                 setFormData({
                     name: '',
                     city: '',
@@ -101,6 +109,7 @@ const Contribute = () => {
                     comment: '',
                     isGiver: 'giver'
                 })
+                sessionStorage.setItem("userId", res.data.response.userId)
             }
             else{
                 setAlert({
@@ -119,19 +128,11 @@ const Contribute = () => {
         <div className="layout-wrapper">
             <div className="contribute-container">
                 <div className="tabs">
-                    <span onClick={() => setUploadOpen(true)} className={uploadOpen ? 'active' : null}>Upload File</span>
-                    <span onClick={() => setUploadOpen(false)} className={!uploadOpen ? 'active' : null}>Fill Form</span>
+                    <span onClick={() => setStructuredFormOpen(true)} className={structuredFormOpen ? 'active' : null}>Fill Form</span>
+                    <span onClick={() => setStructuredFormOpen(false)} className={!structuredFormOpen ? 'active' : null}>Upload File</span>
                 </div>
                 {
-                    uploadOpen ? 
-                    <div className="fill-form">
-                        <p>Please fill this form with complete honesty. We depend on the goodwill of the community, so please do not intentionally spam this form. If you cannot help, please do not hinder others intention to help.</p>
-                        <form onSubmit={onFileUpload}>
-                            <div>
-                                <button type="submit" className="btn">Submit</button>
-                            </div>
-                        </form>
-                    </div> :
+                    structuredFormOpen ?
                     <div className="fill-form">
                         <p>Please fill this form with complete honesty. We depend on the goodwill of the community, so please do not intentionally spam this form. If you cannot help, please do not hinder others intention to help.</p>
                         <form onSubmit={onFormSubmit}>
@@ -211,6 +212,14 @@ const Contribute = () => {
                                 <button type="submit" className="btn">Submit</button>
                             </div>
                         </form>
+                    </div> :
+                    <div className="fill-form">
+                        <p>This feature is currently under construction. Thank you for your patience.</p>
+                        {/* <form onSubmit={onFileUpload}>
+                            <div>
+                                <button type="submit" className="btn">Submit</button>
+                            </div>
+                        </form> */}
                     </div>
                 }
             </div>
