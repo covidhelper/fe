@@ -123,8 +123,9 @@ button {
 
     .comments {
       padding: 0.5em 1em;
-      box-shadow: 0 0 10px $black;
+      box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
       margin: 1em 0;
+      border-radius: 5px;
     }
 
     .cross {
@@ -136,6 +137,10 @@ button {
       padding: 0.5em 1em;
       cursor: pointer;
     }
+  }
+
+  .inc-height {
+    height: 500px;
   }
 }
 

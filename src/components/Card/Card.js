@@ -143,7 +143,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Typography variant="caption" component="div" style={{fontSize: '20px'}} color="primary">{rating ? rating : 0}</Typography>
+                            <Typography variant="caption" component="div" style={{fontSize: '20px'}} color="primary">{rating ? rating.toFixed(1) : 0}</Typography>
                         </Box>
                     </Box>
                     <div className="review">
@@ -182,7 +182,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
         }
         {
             openComments && dataCardEvent &&
-            <Modal open={openComments} title="Comment History" onClose={() => setOpenModal(false)} data={dataCardEvent} />
+            <Modal open={openComments} title="Comment History" onClose={() => setOpenComments(false)} data={dataCardEvent} />
         }
     </div>
   );
