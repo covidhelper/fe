@@ -23,6 +23,26 @@ a {
   color: inherit;
 }
 
+.btn {
+  outline: none;
+  border: none;
+  background-color: $white;
+  border: 2px solid $dark-blue;
+  color: $dark-blue;
+  padding: 0.6em 2em;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 250ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: $dark-blue;
+    color: $white;
+  }
+}
+
 nav {
   position: sticky;
   top: 0;
@@ -76,6 +96,14 @@ nav {
     }
   }
 
+  .hamburger {
+    width: 10px;
+    height: 10px;
+    svg {
+      font-size: 20px;
+    }
+  }
+
   @media (max-width: 1120px) {
     padding: 1em 2em;
   }
@@ -113,26 +141,6 @@ nav {
       text-align: center;
       margin: 2em 0;
 
-      .btn {
-        outline: none;
-        border: none;
-        background-color: $white;
-        border: 2px solid $dark-blue;
-        color: $dark-blue;
-        padding: 0.6em 2em;
-        font-size: 1.2rem;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 250ms ease-in-out;
-
-        &:hover,
-        &:focus {
-          outline: none;
-          background-color: $dark-blue;
-          color: $white;
-        }
-      }
-
       .btn + .btn {
         margin-left: 1em;
       }
@@ -143,6 +151,9 @@ nav {
     img {
       width: 600px;
       height: 600px;
+
+      //   max-width: 100%;
+      //   height: auto;
     }
   }
 
@@ -265,6 +276,72 @@ nav {
         font-size: 30px;
         color: orange;
         margin-right: 0.6em;
+      }
+    }
+  }
+}
+
+.fileUpload {
+  img {
+    width: 800px;
+    height: auto;
+  }
+
+  .fileUploadForm {
+    margin-bottom: 2em;
+  }
+}
+
+.contribute-container {
+  width: 100%;
+  padding: 1em 5em;
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+
+    > span {
+      width: 100%;
+      padding: 0.8em;
+      text-align: center;
+      font-size: 1.4rem;
+      border: 2px solid $dark-blue;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 250ms ease-in-out;
+    }
+
+    > span.active {
+      background-color: $dark-blue;
+      color: $white;
+    }
+  }
+
+  .fill-form {
+    border: 2px solid $dark-blue;
+    border-radius: 10px;
+    padding: 1em 2em;
+    margin-top: 1em;
+    p {
+      font-size: 1.2rem;
+      margin-top: 1em;
+    }
+    form {
+      margin-top: 1em;
+
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+
+      > div {
+        flex: 1 1 48%;
+      }
+
+      button {
+        display: block;
+        margin: 1em auto 0;
       }
     }
   }
