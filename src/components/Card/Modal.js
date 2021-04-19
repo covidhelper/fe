@@ -1,14 +1,6 @@
 import { TextField } from '@material-ui/core'
 import React, { useState } from 'react'
-
-const formatString = value => {
-    if(value.length === 1){
-        return `0${value}`
-    }
-    else{
-        return value
-    }
-}
+import { formatString } from '../../utils/formatString'
 
 const Modal = props => {
     const [comment, setComment] = useState("")
@@ -43,7 +35,7 @@ const Modal = props => {
                                 const date = new Date(c.createdDate)
                                 return (
                                     <div key={ind} className="comments">
-                                        <div className="date">{`${formatString(date.getDate())}/${formatString(date.getMonth()+1)}/${date.getFullYear()} ${formatString(date.getHours())}:${formatString(date.getMinutes())}`}</div>
+                                        <div className="date">{`Date: ${formatString(date.getDate())}/${formatString(date.getMonth()+1)}/${date.getFullYear()}, Time: ${formatString(date.getHours())}:${formatString(date.getMinutes())}`}</div>
                                         <div className="comment">{ c.comment }</div>
                                         <div className="action">{ c.action }</div>
                                     </div>

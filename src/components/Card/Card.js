@@ -3,10 +3,11 @@ import { Send } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import service from '../../utils/axiosConfig';
 import { FORM_FILL_STRUCTURED } from '../../utils/config';
+import { formatString } from '../../utils/formatString';
 import CustomAlert from '../CustomAlert/CustomAlert';
 import Modal from './Modal';
 
-const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink, updateCard }) => {
+const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink, updateCard, action, lastReported }) => {
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
@@ -15,7 +16,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
 
     const [openModal, setOpenModal] = useState(false)
     const [openComments, setOpenComments] = useState(false)
-    const [action, setAction] = useState("")
+    const [actionZ, setActionZ] = useState("")
     const [dataCardEvent, setDataCardEvent] = useState(null)
     
     useEffect(() => {
@@ -28,14 +29,18 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
         if(openComments){
             service.get(`${FORM_FILL_STRUCTURED}/action/${uuid}`)
             .then(res => {
-                setDataCardEvent(res.data.response.dataCardEvent)
+                setDataCardEvent(res.data.response.dataCardEvent.reverse())
             })
         }
     }, [openComments])
 
+    const getDateString = () => {
+        return new Date(lastReported)
+    }
+
     const onVerifySubmit = e => {
         e.preventDefault()
-        setAction(e.target.name)
+        setActionZ(e.target.name)
         setOpenModal(true)
     }
 
@@ -161,6 +166,10 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                 <button name="OutOfStock" className="btn" onClick={onVerifySubmit}>Out of Stock</button>
                 <button name="Unanswered" className="btn" onClick={onVerifySubmit}>Unanswered</button>
                 <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
+                {
+                    action && lastReported ?
+                    <button onClick={e => e.preventDefault()} className="btn">{`Last Reported: ${action}, Date: ${formatString(getDateString().getDate())}/${formatString(getDateString().getMonth()+1)}/${getDateString().getFullYear()}, Time: ${formatString(getDateString().getHours())}:${formatString(getDateString().getMinutes())}`}</button> : null
+                }
             </form>
         </div>
         {
