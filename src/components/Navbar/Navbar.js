@@ -12,8 +12,8 @@ const Navbar = () => {
                 <li className={`nav-li ${location.pathname === "/" ? ' active' : null}`}>
                     <Link to="/">Home</Link>
                 </li>
-                <li className={`nav-li ${location.pathname === "/seek" ? ' active' : null}`}>
-                    <Link to="/seek">Get Help</Link>
+                <li className={`nav-li ${location.pathname === "/get-help" ? ' active' : null}`}>
+                    <Link to="/get-help">Get Help</Link>
                 </li>
                 <li className={`nav-li ${location.pathname === "/contribute" ? ' active' : null}`}>
                     <Link to="/contribute">Contribute</Link>

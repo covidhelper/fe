@@ -21,12 +21,6 @@ const Footer = () => {
                     </div>
                     <div className="block">
                         <div className="icon">
-                            <WhatsApp />
-                        </div>
-                        <span>+91 9370787273</span>
-                    </div>
-                    <div className="block">
-                        <div className="icon">
                             <GitHub />
                         </div>
                         <a href="https://github.com/covidhelper/fe">https://github.com/covidhelper/fe</a>

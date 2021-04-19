@@ -146,7 +146,7 @@ const Contribute = () => {
                                 />
                             </div>
                             <div className="block">
-                                <ReqType required={true} onTypeChange={value => setFormData({ ...formData, requestType: value })} />
+                                <ReqType onTypeChange={value => setFormData({ ...formData, requestType: value })} />
                             </div>
                             <div className="block">
                                 <TextField 
@@ -161,7 +161,7 @@ const Contribute = () => {
                                 <State onStateChange={value => setFormData({ ...formData, state: value })}/>
                             </div>
                             <div className="block">
-                                <City required={true} onCityChange={value => setFormData({ ...formData, city: value })}/>
+                                <City onCityChange={value => setFormData({ ...formData, city: value })}/>
                             </div>
                             <div className="block">
                                 <TextField 
@@ -196,9 +196,8 @@ const Contribute = () => {
                             </div>
                             <div className="block">
                                 <FormControl>
-                                    <InputLabel id="giver-label" required>Giver / Seeker</InputLabel>
+                                    <InputLabel id="giver-label">Giver / Seeker</InputLabel>
                                     <Select
-                                        required
                                         labelId="giver-label"
                                         id="isGiver"
                                         value={formData.isGiver}

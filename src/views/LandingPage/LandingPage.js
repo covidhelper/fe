@@ -14,12 +14,16 @@ const LandingPage = () => {
                         We are building a self-providing community of helpers and seekers.
                     </div>
                     <div className="cta">
-                        <button className="btn">
-                            <Link to="/seek">Get Help</Link>
-                        </button>
-                        <button className="btn">
-                            <Link to="/contribute">Contribute</Link>
-                        </button>
+                        <Link to="/get-help">
+                            <button className="btn">
+                                Get Help
+                            </button>
+                        </Link>
+                        <Link to="/contribute">
+                            <button className="btn">
+                                Contribute
+                            </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="image">

@@ -1,10 +1,14 @@
-import { ArrowDropDown, ArrowDropUp, Mail } from '@material-ui/icons';
+import { Box, CircularProgress, Typography } from '@material-ui/core';
+import { Send } from '@material-ui/icons';
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import service from '../../utils/axiosConfig';
 import { FORM_FILL_STRUCTURED } from '../../utils/config';
 import CustomAlert from '../CustomAlert/CustomAlert';
 
-const Card = ({ name, email, phone, comment, state, city, requestType, address, up, down, mail, uuid }) => {
+const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink }) => {
+    const location = useLocation()
+    
     const [cardOpen, setCardOpen] = useState(true)
     const [alert, setAlert] = useState({
         isOpen: false,
@@ -38,6 +42,21 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
         })
         .catch(err => {
             console.log(err);
+        })
+    }
+
+    const onShareLink = e => {
+        e.preventDefault()
+        if(isLink){
+            navigator.clipboard.writeText(`${window.location.href}`)
+        }
+        else{
+            navigator.clipboard.writeText(`${window.location.href}/${uuid}`)
+        }
+        setAlert({
+            isOpen: true,
+            type: 'success',
+            message: 'Link copied to clipboard!'
         })
     }
 
@@ -80,18 +99,30 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
             </div>
             <div className="arrows">
                 <div className="vote">
-                    <div className="upvote">
-                        <ArrowDropUp />
-                        { up }
+                    <Box position="relative" display="inline-flex">
+                        <CircularProgress variant="determinate" value={(rating/5) * 100} size={50} />
+                        <Box
+                            top={0}
+                            left={0}
+                            bottom={0}
+                            right={0}
+                            position="absolute"
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            <Typography variant="caption" component="div" color="textSecondary">{(rating/5) / 100}</Typography>
+                        </Box>
+                    </Box>
+                    <div className="review">
+                        {totalCount} reviews
                     </div>
-                    <div className="downvote">
-                        <ArrowDropDown />
-                        { down }
+                    <div className="share">
+                        <button className="btn" onClick={onShareLink}>
+                            <Send />
+                            <span>Share Info</span>
+                        </button>
                     </div>
-                </div>
-                <div className="email">
-                    <Mail />
-                    Email
                 </div>
             </div>
         </div>
