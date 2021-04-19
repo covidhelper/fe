@@ -1,10 +1,10 @@
 import { Box, CircularProgress, Typography } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import service from '../../utils/axiosConfig';
 import { FORM_FILL_STRUCTURED } from '../../utils/config';
 import CustomAlert from '../CustomAlert/CustomAlert';
+import Modal from './Modal';
 
 const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink, updateData }) => {
     const [alert, setAlert] = useState({
@@ -13,20 +13,39 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
         type: 'error'
     })
 
+    
+    const [openModal, setOpenModal] = useState(false)
+    const [openComments, setOpenComments] = useState(false)
+    const [action, setAction] = useState("")
+    const [dataCardEvent, setDataCardEvent] = useState(null)
+    
     useEffect(() => {
         if(alert.isOpen){
             setTimeout(() => setAlert({...alert, isOpen: false}), 4000)
         }
     }, [alert.isOpen])
 
-    const [openModal, setOpenModal] = useState(false)
+    useEffect(() => {
+        if(openComments){
+            service.get(`${FORM_FILL_STRUCTURED}/action/${uuid}`)
+            .then(res => {
+                setDataCardEvent(res.data.response.dataCardEvent)
+            })
+        }
+    }, [openComments])
 
     const onVerifySubmit = e => {
         e.preventDefault()
+        setAction(e.target.name)
+        setOpenModal(true)
+    }
+
+    const addComment = comment => {
+        setOpenModal(false)
         const payload = {
             uuid: uuid,
-            comment: "Hello friends! This is me!",
-            action: e.target.name,
+            comment: comment,
+            action: action,
         }
         service.post(FORM_FILL_STRUCTURED+"/action", payload)
         .then(res => {
@@ -67,6 +86,10 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
             type: 'success',
             message: 'Link copied to clipboard!'
         })
+    }
+
+    const onToggleComments = () => {
+
     }
 
   return (
@@ -124,7 +147,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                         </Box>
                     </Box>
                     <div className="review">
-                        <button className="btn" onClick={onShareLink}>
+                        <button className="btn" onClick={() => setOpenComments(true)}>
                             {totalCount ? totalCount : 0} reviews
                         </button>
                     </div>
@@ -152,6 +175,14 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                 message={alert.message}
                 type={alert.type}
             />
+        }
+        {
+            openModal &&
+            <Modal open={openModal} title="Comment your experience" addComment={addComment} onClose={() => setOpenModal(false)} type="confirm" />
+        }
+        {
+            openComments && dataCardEvent &&
+            <Modal open={openComments} title="Comment History" onClose={() => setOpenModal(false)} data={dataCardEvent} />
         }
     </div>
   );
