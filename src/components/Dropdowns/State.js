@@ -23,8 +23,9 @@ const State = props => {
 
     return (
         <FormControl>
-            <InputLabel id="state-label">State</InputLabel>
+            <InputLabel id="state-label" required={props.required}>State</InputLabel>
             <Select
+                required={props.required}
                 labelId="state-label"
                 id="State"
                 value={selectedValue}

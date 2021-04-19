@@ -22,9 +22,9 @@ const City = props => {
 
     return (
         <FormControl>
-            <InputLabel id="city-label" required>City</InputLabel>
+            <InputLabel id="city-label" required={props.required}>City</InputLabel>
             <Select
-                required
+                required={props.required}
                 labelId="city-label"
                 id="city"
                 value={selectedValue}

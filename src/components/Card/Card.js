@@ -42,7 +42,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
     }
 
   return (
-    <div className="card" onClick={() => setCardOpen(prevState => !prevState)}>
+    <div className="card">
         <div className="upperRow">
             <div className="content-wrapper">
                 <div className="block">
@@ -98,12 +98,12 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
         {
             cardOpen &&
             <div className="bottomRow">
-                <form onSubmit={onVerifySubmit}>
-                    <button name="Verify" className="btn" type="submit">Verify</button>
-                    <button name="OutOfStock" className="btn" type="submit">Out of Stock</button>
-                    <button name="Unanswered" className="btn" type="submit">Unanswered</button>
-                    <button name="Report" className="btn" type="submit">Report</button>
-                    <button name="date" className="btn" type="submit">Next Available Date</button>
+                <form>
+                    <button name="Verify" className="btn" onClick={onVerifySubmit}>Verify</button>
+                    <button name="OutOfStock" className="btn" onClick={onVerifySubmit}>Out of Stock</button>
+                    <button name="Unanswered" className="btn" onClick={onVerifySubmit}>Unanswered</button>
+                    <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
+                    <button name="date" className="btn" onClick={onVerifySubmit}>Next Available Date</button>
                 </form>
             </div>
         }

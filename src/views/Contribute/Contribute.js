@@ -28,19 +28,10 @@ const Contribute = () => {
     })
 
     const onFormDataChange = e => {
-        console.log(e.target.id, e.target.value);
-        if(e.target.id === undefined){
-            setFormData({
-                ...formData,
-                requestType: e.target.value
-            })
-        }
-        else{
-            setFormData({
-                ...formData,
-                [e.target.id]: e.target.value
-            })
-        }
+        setFormData({
+            ...formData,
+            [e.target.id]: e.target.value
+        })
     }
 
     const onAddContact = e => {
@@ -84,7 +75,7 @@ const Contribute = () => {
         service.post(FORM_FILL_STRUCTURED, payload)
         .then(res => {
             if(res.data.success){
-                if(res.data.response.isSave){
+                if(res.data.response.dataCards[0].isSave){
                     setAlert({
                         isOpen: true,
                         message: "Data added successfully!",
@@ -136,79 +127,114 @@ const Contribute = () => {
                     <div className="fill-form">
                         <p>Please fill this form with complete honesty. We depend on the goodwill of the community, so please do not intentionally spam this form. If you cannot help, please do not hinder others intention to help.</p>
                         <form onSubmit={onFormSubmit}>
-                            <TextField 
-                                label="Name"
-                                id="name"
-                                value={formData.name}
-                                onChange={onFormDataChange} 
-                                type="text"
-                            />
-                            <TextField 
-                                label="Address"
-                                id="address"
-                                value={formData.address}
-                                onChange={onFormDataChange} 
-                                type="text"
-                            />
-                            {
-                                formData.contacts.map((c, ind) => {
-                                    return (
-                                        <TextField 
-                                            label="Contact Person Name"
-                                            id="contactPerson"
-                                            value={c.contactPerson}
-                                            onChange={e => onContactChange(e, ind)} 
-                                            type="text"
-                                        />
-                                    )
-                                })
-                            }
-                            {
-                                formData.contacts.map((c, ind) => {
-                                    return (
-                                        <TextField 
-                                            label="Phone Number"
-                                            required
-                                            id="phone"
-                                            value={c.phone}
-                                            onChange={e => onContactChange(e, ind)} 
-                                            type="text"
-                                        />
-                                    )
-                                })
-                            }
-                            <State onStateChange={value => setFormData({ ...formData, state: value })}/>
-                            <City onCityChange={value => setFormData({ ...formData, city: value })}/>
-                            <TextField 
-                                label="Comment"
-                                id="comment"
-                                value={formData.comment}
-                                onChange={onFormDataChange} 
-                                type="text"
-                            />
-                            <FormControl>
-                                <InputLabel id="giver-label" required>Giver / Seeker</InputLabel>
-                                <Select
+                            <div className="block">
+                                <TextField 
+                                    label="Name"
+                                    id="name"
+                                    value={formData.name}
+                                    onChange={onFormDataChange} 
+                                    type="text"
+                                />
+                            </div>
+                            <div className="block">
+                                <TextField 
+                                    label="Address"
+                                    id="address"
+                                    value={formData.address}
+                                    onChange={onFormDataChange} 
+                                    type="text"
+                                />
+                            </div>
+                            <div className="block">
+                                <ReqType required={true} onTypeChange={value => setFormData({ ...formData, requestType: value })} />
+                            </div>
+                            <div className="block">
+                                <TextField 
+                                    label="Email"
+                                    id="email"
+                                    value={formData.email}
+                                    onChange={onFormDataChange} 
+                                    type="email"
+                                />
+                            </div>
+                            <div className="block">
+                                <State onStateChange={value => setFormData({ ...formData, state: value })}/>
+                            </div>
+                            <div className="block">
+                                <City required={true} onCityChange={value => setFormData({ ...formData, city: value })}/>
+                            </div>
+                            <div className="block">
+                                <TextField 
+                                    label="Contact Person Name"
+                                    id="contactPerson"
+                                    value={formData.contacts[0].contactPerson}
+                                    onChange={e => onContactChange(e, 0)} 
+                                    type="text"
+                                />
+                            </div>
+                            <div className="block">
+                                <TextField 
+                                    label="Phone Number"
                                     required
-                                    labelId="giver-label"
-                                    id="isGiver"
-                                    value={formData.isGiver}
-                                    onChange={e => setFormData({ ...formData, isGiver: e.target.value })}
-                                >
-                                    <MenuItem value="giver">Giver</MenuItem>
-                                    <MenuItem value="seeker">Seeker</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <ReqType onTypeChange={value => setFormData({ ...formData, requestType: value })} />
-                            <TextField 
-                                label="Email"
-                                id="email"
-                                value={formData.email}
-                                onChange={onFormDataChange} 
-                                type="email"
-                            />
-                            <div>
-                                <button className="btn" onClick={onAddContact}><Add /> Add New Contact</button>
+                                    id="phone"
+                                    value={formData.contacts[0].phone}
+                                    onChange={e => onContactChange(e, 0)} 
+                                    type="text"
+                                />
+                            </div>
+                            <div className="block">
+                                <TextField 
+                                    label="Comment"
+                                    id="comment"
+                                    multiline
+                                    rows={4}
+                                    value={formData.comment}
+                                    onChange={onFormDataChange} 
+                                    type="text"
+                                    variant="outlined"
+                                />
+                            </div>
+                            <div className="block">
+                                <FormControl>
+                                    <InputLabel id="giver-label" required>Giver / Seeker</InputLabel>
+                                    <Select
+                                        required
+                                        labelId="giver-label"
+                                        id="isGiver"
+                                        value={formData.isGiver}
+                                        onChange={e => setFormData({ ...formData, isGiver: e.target.value })}
+                                    >
+                                        <MenuItem value="giver">Giver</MenuItem>
+                                        <MenuItem value="seeker">Seeker</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            {
+                                formData.contacts.map((c, ind) => {
+                                    return (
+                                        ind !== 0 ?
+                                        <div key={ind} className="contact">
+                                            <TextField 
+                                                label="Contact Person Name"
+                                                id="contactPerson"
+                                                value={c.contactPerson}
+                                                onChange={e => onContactChange(e, ind)} 
+                                                type="text"
+                                            />
+                                            <TextField 
+                                                label="Phone Number"
+                                                required
+                                                id="phone"
+                                                value={c.phone}
+                                                onChange={e => onContactChange(e, ind)} 
+                                                type="text"
+                                            />
+                                        </div> : null
+                                    )
+                                })
+                            }
+                            <div className="control-buttons">
+                                <button className="btn" onClick={onAddContact}>Add New Contact</button>
                                 <button type="submit" className="btn">Submit</button>
                             </div>
                         </form>

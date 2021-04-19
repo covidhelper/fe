@@ -46,6 +46,29 @@ button {
   }
 }
 
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+
+  > span {
+    width: 100%;
+    padding: 0.8em;
+    text-align: center;
+    font-size: 1.4rem;
+    border: 2px solid $dark-blue;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+  }
+
+  > span.active {
+    background-color: $dark-blue;
+    color: $white;
+  }
+}
+
 nav {
   position: sticky;
   z-index: 100;
@@ -155,9 +178,6 @@ nav {
     img {
       width: 600px;
       height: 600px;
-
-      //   max-width: 100%;
-      //   height: auto;
     }
   }
 
@@ -219,6 +239,24 @@ nav {
   }
 }
 
+.card-wrapper {
+  margin-top: 1em;
+  .params {
+    margin-top: 2em;
+    > .MuiFormControl-root {
+      width: 250px;
+    }
+
+    > .MuiFormControl-root + .MuiFormControl-root {
+      margin-left: 2em;
+    }
+
+    .searchbar {
+      width: 400px;
+    }
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -226,7 +264,7 @@ nav {
   border-radius: 10px;
   padding: 1em 2em;
   margin: 2em 0;
-  cursor: pointer;
+
   .upperRow {
     display: flex;
     .content-wrapper {
@@ -324,29 +362,6 @@ nav {
   width: 100%;
   padding: 1em 5em;
 
-  .tabs {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-
-    > span {
-      width: 100%;
-      padding: 0.8em;
-      text-align: center;
-      font-size: 1.4rem;
-      border: 2px solid $dark-blue;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 250ms ease-in-out;
-    }
-
-    > span.active {
-      background-color: $dark-blue;
-      color: $white;
-    }
-  }
-
   .fill-form {
     border: 2px solid $dark-blue;
     border-radius: 10px;
@@ -363,13 +378,33 @@ nav {
       gap: 1em;
       flex-wrap: wrap;
 
-      > div {
+      > .block {
         flex: 1 1 48%;
+        > div {
+          width: 100%;
+        }
       }
 
-      button {
-        display: block;
-        margin: 1em auto 0;
+      .contact {
+        width: 100%;
+        display: flex;
+        gap: 1em;
+
+        > div {
+          flex: 1 1 48%;
+        }
+      }
+
+      .control-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        button {
+          display: block;
+          margin: 1em auto 0;
+        }
       }
     }
   }

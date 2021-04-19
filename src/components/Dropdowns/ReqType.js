@@ -23,9 +23,9 @@ const ReqType = props => {
 
     return (
         <FormControl>
-            <InputLabel id="type-label" required>Request Type</InputLabel>
+            <InputLabel id="type-label" required={props.required}>Request Type</InputLabel>
             <Select
-                required
+                required={props.required}
                 labelId="type-label"
                 id="reqType"
                 value={selectedValue}
