@@ -3,7 +3,6 @@ import axios from 'axios'
 const service = axios.create({
     headers:{
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhdGhhcnZhamFuZ2FkYUBnbWFpbC5jb20sNDcsOTM3MDc4NzI3MyxDVVNUT01FUixNakl6TWpJeE5qRTNOemt4TWpBMU5EUTQiLCJpc3MiOiJpbnN1cmVteXRlYW0uY29tIiwiZXhwIjoxNjE4OTAyMjMxfQ.Xy3Jqr6Cy45jJvTnBocnBv_9U9cuw_frhK-vqvrlf1YLo5aODQe8fjaBHspY7GAFMGwFmD83RK3ALJMNcgmC2w"
     }
 });
 

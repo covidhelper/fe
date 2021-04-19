@@ -7,8 +7,6 @@ import State from '../../components/Dropdowns/State'
 import FileUpload from './FIleUpload/FileUpload'
 
 const Contribute = () => {
-    const [selectedValue, setSelectedValue] = useState('')
-
     const [uploadOpen, setUploadOpen] = useState(true)
     const [formData, setFormData] = useState({
         name: '',
@@ -88,7 +86,6 @@ const Contribute = () => {
                     <div className="fill-form">
                         <p>Please fill this form with complete honesty. We depend on the goodwill of the community, so please do not intentionally spam this form. If you cannot help, please do not hinder others intention to help.</p>
                         <form onSubmit={onFileUpload}>
-                            
                             <div>
                                 <button type="submit" className="btn">Submit</button>
                             </div>
