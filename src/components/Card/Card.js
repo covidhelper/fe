@@ -6,7 +6,7 @@ import service from '../../utils/axiosConfig';
 import { FORM_FILL_STRUCTURED } from '../../utils/config';
 import CustomAlert from '../CustomAlert/CustomAlert';
 
-const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink }) => {
+const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink, updateData }) => {
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
@@ -38,6 +38,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                     type: 'success',
                     isOpen: true,
                 })
+                updateData(res.data.response.dataCard)
             }
             else{
                 setAlert({

@@ -85,6 +85,16 @@ const Seek = () => {
         }
     }, [params])
 
+    const updateCard = data => {
+        const id = data.uuid
+        let cardCopy = cards;
+        cardCopy = cardCopy.map(c => {
+            if(c.uuid !== id) return c
+            else return data
+        })
+        setCards(cardCopy)
+    }
+
     return (
         <div className="layout-wrapper">
             <div className="card-wrapper">
@@ -125,12 +135,12 @@ const Seek = () => {
                     seeker ?
                     cards && cards.map((c, ind) => {
                         return (
-                            !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} />
+                            !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                         )
                     }) :
                     cards && cards.map((c, ind) => {
                         return (
-                            c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} />
+                            c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                         )
                     })
                 }
