@@ -23,17 +23,19 @@ const ReqType = props => {
 
     return (
         <FormControl>
-            <InputLabel id="type-label" required={props.required}>Request Type</InputLabel>
+            <InputLabel shrink id="type-label" required={props.required}>Request Type</InputLabel>
             <Select
                 required={props.required}
                 labelId="type-label"
                 id="reqType"
                 value={selectedValue}
                 onChange={onTypeChange}
+                displayEmpty
             >
-            {
-                data && data.map(d => <MenuItem key={d.id} value={d.id}>{d.name}</MenuItem>)
-            }
+                <MenuItem value="" disabled>Select Requirement</MenuItem>
+                {
+                    data && data.map(d => <MenuItem key={d.id} value={d.id}>{d.name}</MenuItem>)
+                }
             </Select>
         </FormControl>
     )

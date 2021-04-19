@@ -1,4 +1,4 @@
-import { GitHub, Mail, WhatsApp } from '@material-ui/icons'
+import { GitHub, Mail } from '@material-ui/icons'
 import React from 'react'
 
 const Footer = () => {
@@ -24,6 +24,12 @@ const Footer = () => {
                             <GitHub />
                         </div>
                         <a href="https://github.com/covidhelper/fe">https://github.com/covidhelper/fe</a>
+                    </div>
+                    <div className="block">
+                        <div className="icon">
+                            <GitHub />
+                        </div>
+                        <a href="https://github.com/covidhelper/curatedListBe">https://github.com/covidhelper/curatedListBe</a>
                     </div>
                 </div>
             </footer>

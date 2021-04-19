@@ -38,8 +38,7 @@ button {
   cursor: pointer;
   transition: all 250ms ease-in-out;
 
-  &:hover,
-  &:focus {
+  &:hover {
     outline: none;
     background-color: $dark-blue;
     color: $white;

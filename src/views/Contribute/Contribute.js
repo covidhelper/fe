@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomAlert from '../../components/CustomAlert/CustomAlert'
 import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
@@ -26,6 +26,12 @@ const Contribute = () => {
         comment: '',
         isGiver: 'giver'
     })
+
+    useEffect(() => {
+        if(alert.isOpen){
+            setTimeout(() => setAlert({...alert, isOpen: false}), 4000)
+        }
+    }, [alert.isOpen])
 
     const onFormDataChange = e => {
         setFormData({
@@ -77,6 +83,7 @@ const Contribute = () => {
             if(res.data.success){
                 if(res.data.response.dataCards[0].isSave){
                     setAlert({
+                        ...alert,
                         isOpen: true,
                         message: "Data added successfully!",
                         type: 'success'
@@ -84,6 +91,7 @@ const Contribute = () => {
                 }
                 else{
                     setAlert({
+                        ...alert,
                         isOpen: true,
                         message: "Data already present!",
                         type: 'error'
@@ -104,6 +112,7 @@ const Contribute = () => {
             }
             else{
                 setAlert({
+                    ...alert,
                     isOpen: true,
                     message: res.data.message,
                     type: 'error'

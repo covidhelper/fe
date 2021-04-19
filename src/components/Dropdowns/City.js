@@ -4,7 +4,7 @@ import city from '../../utils/in.json'
 
 const City = props => {
     const [cities, setCities] = useState(null)
-    const [selectedValue, setSelectedValue] = useState('')
+    const [selectedValue, setSelectedValue] = useState("")
 
     useEffect(() => {
         let arr = []
@@ -22,17 +22,19 @@ const City = props => {
 
     return (
         <FormControl>
-            <InputLabel id="city-label" required={props.required}>City</InputLabel>
+            <InputLabel shrink id="city-label" required={props.required}>City</InputLabel>
             <Select
                 required={props.required}
                 labelId="city-label"
                 id="city"
                 value={selectedValue}
                 onChange={onCityChange}
+                displayEmpty
             >
-            {
-                cities && cities.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)
-            }
+                <MenuItem value="" disabled>Select City</MenuItem>
+                {
+                    cities && cities.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)
+                }
             </Select>
         </FormControl>
     )

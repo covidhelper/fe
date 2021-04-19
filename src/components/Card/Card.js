@@ -1,20 +1,25 @@
 import { Box, CircularProgress, Typography } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import service from '../../utils/axiosConfig';
 import { FORM_FILL_STRUCTURED } from '../../utils/config';
 import CustomAlert from '../CustomAlert/CustomAlert';
 
 const Card = ({ name, email, phone, comment, state, city, requestType, address, uuid, rating, totalCount, isLink }) => {
-    const location = useLocation()
-    
-    const [cardOpen, setCardOpen] = useState(true)
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
         type: 'error'
     })
+
+    useEffect(() => {
+        if(alert.isOpen){
+            setTimeout(() => setAlert({...alert, isOpen: false}), 4000)
+        }
+    }, [alert.isOpen])
+
+    const [openModal, setOpenModal] = useState(false)
 
     const onVerifySubmit = e => {
         e.preventDefault()
@@ -26,17 +31,20 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
         service.post(FORM_FILL_STRUCTURED+"/action", payload)
         .then(res => {
             if(res.data.success){
+                console.log("This was successful");
                 setAlert({
-                    isOpen: true,
+                    ...alert,
                     message: 'Data has been updated!',
-                    type: 'success'
+                    type: 'success',
+                    isOpen: true,
                 })
             }
             else{
                 setAlert({
-                    isOpen: true,
+                    ...alert,
                     message: res.data.message,
-                    type: 'error'
+                    type: 'error',
+                    isOpen: true,
                 })
             }
         })
@@ -100,7 +108,7 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
             <div className="arrows">
                 <div className="vote">
                     <Box position="relative" display="inline-flex">
-                        <CircularProgress variant="determinate" value={(rating/5) * 100} size={50} />
+                        <CircularProgress variant="determinate" value={100} size={50} />
                         <Box
                             top={0}
                             left={0}
@@ -111,11 +119,13 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Typography variant="caption" component="div" color="textSecondary">{(rating/5) / 100}</Typography>
+                            <Typography variant="caption" component="div" style={{fontSize: '20px'}} color="primary">{rating ? rating : 0}</Typography>
                         </Box>
                     </Box>
                     <div className="review">
-                        {totalCount} reviews
+                        <button className="btn" onClick={onShareLink}>
+                            {totalCount ? totalCount : 0} reviews
+                        </button>
                     </div>
                     <div className="share">
                         <button className="btn" onClick={onShareLink}>
@@ -126,18 +136,14 @@ const Card = ({ name, email, phone, comment, state, city, requestType, address, 
                 </div>
             </div>
         </div>
-        {
-            cardOpen &&
-            <div className="bottomRow">
-                <form>
-                    <button name="Verify" className="btn" onClick={onVerifySubmit}>Verify</button>
-                    <button name="OutOfStock" className="btn" onClick={onVerifySubmit}>Out of Stock</button>
-                    <button name="Unanswered" className="btn" onClick={onVerifySubmit}>Unanswered</button>
-                    <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
-                    <button name="date" className="btn" onClick={onVerifySubmit}>Next Available Date</button>
-                </form>
-            </div>
-        }
+        <div className="bottomRow">
+            <form>
+                <button name="Verify" className="btn" onClick={onVerifySubmit}>Verify</button>
+                <button name="OutOfStock" className="btn" onClick={onVerifySubmit}>Out of Stock</button>
+                <button name="Unanswered" className="btn" onClick={onVerifySubmit}>Unanswered</button>
+                <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
+            </form>
+        </div>
         {
             alert.isOpen &&
             <CustomAlert

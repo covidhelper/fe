@@ -23,17 +23,19 @@ const State = props => {
 
     return (
         <FormControl>
-            <InputLabel id="state-label" required={props.required}>State</InputLabel>
+            <InputLabel shrink id="state-label" required={props.required}>State</InputLabel>
             <Select
                 required={props.required}
                 labelId="state-label"
                 id="State"
                 value={selectedValue}
                 onChange={onStateChange}
+                displayEmpty
             >
-            {
-                states && states.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)
-            }
+                <MenuItem value="" disabled>Select State</MenuItem>
+                {
+                    states && states.map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)
+                }
             </Select>
         </FormControl>
     )

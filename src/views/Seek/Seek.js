@@ -43,6 +43,12 @@ const Seek = () => {
     const { uuid } = useParams()
 
     useEffect(() => {
+        if(alert.isOpen){
+            setTimeout(() => setAlert({...alert, isOpen: false}), 4000)
+        }
+    }, [alert.isOpen])
+
+    useEffect(() => {
         console.log(uuid);
         setLoading(true)
         service.get(FORM_FILL_STRUCTURED)
@@ -52,6 +58,7 @@ const Seek = () => {
             }
             else{
                 setAlert({
+                    ...alert,
                     isOpen: true,
                     message: res.data.message,
                     type: 'error'
@@ -67,7 +74,7 @@ const Seek = () => {
     useEffect(() => {
         if(!(params.state === "" && params.city === "" && params.type === "" && params.query === "")){
             setLoading(true)
-            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&state=${params.state ? params.state : 'null'}&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}`)
+            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&state=${params.state ? params.state : 'null'}&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
             .then(res => {
                 console.log(res);
             })
