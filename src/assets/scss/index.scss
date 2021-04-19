@@ -271,21 +271,8 @@ nav {
     gap: 2em;
     color: $white;
 
-    .about {
-      flex: 1 1 70%;
-
-      > p:first-child {
-        font-size: 1.5rem;
-      }
-
-      > p:nth-child(2) {
-        margin-top: 1em;
-        font-size: 1.2rem;
-      }
-    }
-
     .contact {
-      flex: 1 1 30%;
+      flex: 1 1 100%;
 
       > p:first-child {
         font-size: 1.5rem;

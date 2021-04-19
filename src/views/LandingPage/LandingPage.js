@@ -11,7 +11,7 @@ const LandingPage = () => {
                         Looking for help near you in these tough times? Don't worry, we've got you covered!
                     </div>
                     <div className="sub-heading">
-                        We are building a self-providing community of helpers and seekers.
+                        There’s a flood of information available about the suppliers/providers/helpers on social media. We need to curate a verifiable listing for bridging the gap between seekers and givers.
                     </div>
                     <div className="cta">
                         <Link to="/get-help">

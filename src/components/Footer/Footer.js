@@ -5,12 +5,6 @@ const Footer = () => {
     return (
         <div className="footer-wrapper">
             <footer>
-                <div className="about">
-                    <p>About Us</p>
-                    <p>
-                        There’s a flood of information available about the suppliers/providers/helpers on social media. We need to curate a verifiable listing for bridging the gap between takers and givers.
-                    </p>
-                </div>
                 <div className="contact">
                     <p>Contact Us</p>
                     <div className="block">
