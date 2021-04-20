@@ -8,7 +8,7 @@ const LandingPage = () => {
             <div className="landing-container">
                 <div className="content">
                     <div className="heading">
-                        Looking for help near you in these tough times? Don't worry, we've got you covered!
+                        Community Initiative to curate verified listing of covid resources
                     </div>
                     <div className="sub-heading">
                         There’s a flood of information available about the suppliers/providers/helpers on social media. We need to curate a verifiable listing for bridging the gap between seekers and givers.
