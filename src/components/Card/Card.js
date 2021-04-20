@@ -79,8 +79,12 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
 
     const onShareLink = e => {
         e.preventDefault()
+        console.log(window.location);
         if(isLink){
             navigator.clipboard.writeText(`${window.location.href}`)
+        }
+        else if(window.location.pathname === "/contribute"){
+            navigator.clipboard.writeText(`${window.location.origin}/get-help/${uuid}`)
         }
         else{
             navigator.clipboard.writeText(`${window.location.href}/${uuid}`)
