@@ -94,9 +94,20 @@ const Seek = () => {
     useEffect(() => {
         if(!(params.city === "" && params.type === "" && params.query === "")){
             setLoading(true)
-            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
+            service.get(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
             .then(res => {
                 console.log(res);
+                if(res.data.success){
+                    setCards(res.data.response.dataCards)
+                }
+                else{
+                    setAlert({
+                        ...alert,
+                        isOpen: true,
+                        message: 'Some error eoccured in fetching the data',
+                        type: 'error'
+                    })
+                }
             })
             .catch(err => {
                 console.log(err);

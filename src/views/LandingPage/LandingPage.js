@@ -8,10 +8,10 @@ const LandingPage = () => {
             <div className="landing-container">
                 <div className="content">
                     <div className="heading">
-                        Community Initiative to curate verified listing of covid resources
+                        This is a community initiative to curate verified listing of covid resources.
                     </div>
                     <div className="sub-heading">
-                        There’s a flood of information available about the suppliers/providers/helpers on social media. We need to curate a verifiable listing for bridging the gap between seekers and givers.
+                        There’s a flood of information available about the suppliers/providers/helpers on social media. We aim to curate a verifiable listing for bridging the gap between seekers and givers.
                     </div>
                     <div className="cta">
                         <Link to="/get-help">
