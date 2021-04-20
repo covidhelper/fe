@@ -7,7 +7,7 @@ import { formatString } from '../../utils/formatString';
 import CustomAlert from '../CustomAlert/CustomAlert';
 import Modal from './Modal';
 
-const Card = ({ name, email, phone, comment, city, requestType, address, uuid, rating, totalCount, isLink, showUpdate, updateCard, action, lastReported }) => {
+const Card = ({ name, email, phone, comment, city, requestType, address, uuid, rating, totalCount, isLink, updateCard, action, lastReported }) => {
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
@@ -156,21 +156,16 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
                 </div>
             </div>
         </div>
-        {
-            showUpdate === false ?
-            null :
-            <div className="bottomRow">
-                <button name="Verify" className="btn" onClick={onVerifySubmit}>Verify</button>
-                <button name="OutOfStock" className="btn" onClick={onVerifySubmit}>Out of Stock</button>
-                <button name="Unanswered" className="btn" onClick={onVerifySubmit}>Unanswered</button>
-                <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
-                {
-                    action && lastReported ?
-                    <button onClick={e => e.preventDefault()} className="btn">{`Last Reported: ${action}, Date: ${formatString(getDateString().getDate())}/${formatString(getDateString().getMonth()+1)}/${getDateString().getFullYear()}, Time: ${formatString(getDateString().getHours())}:${formatString(getDateString().getMinutes())}`}</button> : null
-                }
-            </div>
-
-        }
+        <div className="bottomRow">
+            <button name="Verify" className="btn" onClick={onVerifySubmit}>Verify</button>
+            <button name="OutOfStock" className="btn" onClick={onVerifySubmit}>Out of Stock</button>
+            <button name="Unanswered" className="btn" onClick={onVerifySubmit}>Unanswered</button>
+            <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
+            {
+                action && lastReported ?
+                <button onClick={e => e.preventDefault()} className="btn">{`Last Reported: ${action}, Date: ${formatString(getDateString().getDate())}/${formatString(getDateString().getMonth()+1)}/${getDateString().getFullYear()}, Time: ${formatString(getDateString().getHours())}:${formatString(getDateString().getMinutes())}`}</button> : null
+            }
+        </div>
         {
             alert.isOpen &&
             <CustomAlert

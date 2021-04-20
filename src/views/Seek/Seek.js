@@ -158,7 +158,7 @@ const Seek = () => {
                     {
                         cards && cards.map((c, ind) => {
                             return (
-                                <Card showUpdate={true} isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         })
                     }
@@ -176,12 +176,12 @@ const Seek = () => {
                         !seeker ?
                         cards && cards.map((c, ind) => {
                             return (
-                                c.isGiver && <Card showUpdate={true} isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         }) :
                         cards && cards.map((c, ind) => {
                             return (
-                                !c.isGiver && <Card showUpdate={true} isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         })
                     ) : null

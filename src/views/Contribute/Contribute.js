@@ -290,7 +290,7 @@ const Contribute = () => {
                         <span>Data Preview</span>
                         {
                             cardData && cardData.uuid ?
-                            <Card isLink={false} { ...cardData } showUpdate={false} updateCard={() => console.log("Hello")} />
+                            <Card isLink={false} { ...cardData } updateCard={value => setCardData(value)} />
                             : null
                         }
                         <button className="btn" onClick={discardData} >Discard</button>
