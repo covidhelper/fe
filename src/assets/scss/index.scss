@@ -146,6 +146,9 @@ button {
       padding: 0.5em 1em;
       cursor: pointer;
     }
+    @media (max-width: 767px) {
+      width: 350px;
+    }
   }
 
   .inc-height {

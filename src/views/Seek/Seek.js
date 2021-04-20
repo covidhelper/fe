@@ -6,7 +6,6 @@ import Card from '../../components/Card/Card'
 import CustomAlert from '../../components/CustomAlert/CustomAlert'
 import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
-import State from '../../components/Dropdowns/State'
 import service from '../../utils/axiosConfig'
 import { FORM_FILL_STRUCTURED } from '../../utils/config'
 
@@ -26,7 +25,6 @@ import { FORM_FILL_STRUCTURED } from '../../utils/config'
 
 const Seek = () => {
     const [params, setParams] = useState({
-        state: '',
         city: '',
         type: '',
         query: ''
@@ -94,9 +92,9 @@ const Seek = () => {
     }, [])
 
     useEffect(() => {
-        if(!(params.state === "" && params.city === "" && params.type === "" && params.query === "")){
+        if(!(params.city === "" && params.type === "" && params.query === "")){
             setLoading(true)
-            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&state=${params.state ? params.state : 'null'}&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
+            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
             .then(res => {
                 console.log(res);
             })
@@ -108,7 +106,6 @@ const Seek = () => {
     }, [params])
 
     const updateCard = data => {
-        console.log("Hello guys!")
         const id = data.uuid
         let cardCopy = cards;
         cardCopy = cardCopy.map(c => {
@@ -129,7 +126,6 @@ const Seek = () => {
                             <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seeker</span>
                         </div>
                         <div className="params">
-                            <State onStateChange={value => setParams({ ...params, state: value })}/>
                             <City onCityChange={value => setParams({ ...params, city: value })}/>
                             <ReqType onTypeChange={value => setParams({ ...params, type: value })} />
                             <FormControl className="searchbar">
