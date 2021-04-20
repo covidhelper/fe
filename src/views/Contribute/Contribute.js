@@ -107,15 +107,13 @@ const Contribute = () => {
         })
         .finally(() => {
             setFormData({
+                ...formData,
                 name: '',
-                city: '',
                 newCity: '',
                 email: '',
                 contacts: [{ phone: '', contactPerson: '' }],
                 address: '',
-                requestType: '',
                 comment: '',
-                isGiver: 'giver'
             })
         })
     }
