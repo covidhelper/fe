@@ -94,7 +94,7 @@ const Seek = () => {
     useEffect(() => {
         if(!(params.city === "" && params.type === "" && params.query === "")){
             setLoading(true)
-            service.post(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
+            service.get(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
             .then(res => {
                 console.log(res);
             })
@@ -147,7 +147,7 @@ const Seek = () => {
                     {
                         cards && cards.map((c, ind) => {
                             return (
-                                <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                <Card showUpdate={true} isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         })
                     }
@@ -165,12 +165,12 @@ const Seek = () => {
                         !seeker ?
                         cards && cards.map((c, ind) => {
                             return (
-                                c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                c.isGiver && <Card showUpdate={true} isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         }) :
                         cards && cards.map((c, ind) => {
                             return (
-                                !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                !c.isGiver && <Card showUpdate={true} isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         })
                     ) : null

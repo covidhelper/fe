@@ -12,7 +12,7 @@ const City = props => {
         .then(res => {
             console.log(res.data);
             if(res.data.success){
-                let cityCopy = res.data.response.city
+                let cityCopy = res.data.response.city.filter(c => c.city.trim() !== "")
                 cityCopy = cityCopy.sort((a, b) => a.city > b.city ? 1 : -1)
                 setCities(cityCopy)
             }

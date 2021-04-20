@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
+import Card from '../../components/Card/Card'
 import CustomAlert from '../../components/CustomAlert/CustomAlert'
 import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
@@ -25,6 +26,8 @@ const Contribute = () => {
         comment: '',
         isGiver: 'giver'
     })
+    const [showCard, setShowCard] = useState(false)
+    const [cardData, setCardData] = useState(null)
 
     useEffect(() => {
         if(alert.isOpen){
@@ -77,6 +80,8 @@ const Contribute = () => {
         .then(res => {
             if(res.data.success){
                 if(res.data.response.dataCards[0].isSave){
+                    setCardData({...res.data.response.dataCards[0]})
+                    setShowCard(true)
                     setAlert({
                         ...alert,
                         isOpen: true,
@@ -115,6 +120,34 @@ const Contribute = () => {
                 address: '',
                 comment: '',
             })
+        })
+    }
+
+    const discardData = e => {
+        e.preventDefault()
+        service.delete(`${FORM_FILL_STRUCTURED}/${cardData.uuid}`)
+        .then(res => {
+            if(res.data.success){
+                setCardData(null)
+                setShowCard(false)
+                setAlert({
+                    ...alert,
+                    isOpen: true,
+                    message: 'Data deleted successfully!',
+                    type: 'success'
+                })
+            }
+            else{
+                setAlert({
+                    ...alert,
+                    isOpen: true,
+                    message: res.data.message,
+                    type: 'error'
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err);
         })
     }
 
@@ -250,6 +283,18 @@ const Contribute = () => {
                     <div className="fill-form">
                         <p>This feature is currently under construction. Thank you for your patience.</p>
                     </div>
+                }
+                {
+                    showCard ?
+                    <div className="card-preview">
+                        <span>Data Preview</span>
+                        {
+                            cardData.uuid ?
+                            <Card isLink={false} { ...cardData } showUpdate={false} updateCard={() => console.log("Hello")} />
+                            : null
+                        }
+                        <button className="btn" onClick={discardData} >Discard</button>
+                    </div> : null
                 }
             </div>
             {
