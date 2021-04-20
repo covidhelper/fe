@@ -101,28 +101,28 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
                     <p>{ name ? name : "-" }</p>
                 </div>
                 <div className="block">
-                    <span>Email</span>
-                    <p>{ email ? email : "-" }</p>
-                </div>
-                <div className="block">
                     <span>Phone</span>
                     <p>{ phone ? phone : "-" }</p>
-                </div>
-                <div className="block">
-                    <span>Description</span>
-                    <p>{ comment ? comment : "-" }</p>
                 </div>
                 <div className="block">
                     <span>City</span>
                     <p>{ city ? city : "-" }</p>
                 </div>
                 <div className="block">
+                    <span>Type</span>
+                    <p>{ requestType ? requestType : "-" }</p>
+                </div>
+                <div className="block">
+                    <span>Email</span>
+                    <p>{ email ? email : "-" }</p>
+                </div>
+                <div className="block">
                     <span>Address</span>
                     <p>{ address ? address : "-" }</p>
                 </div>
                 <div className="block">
-                    <span>Type</span>
-                    <p>{ requestType ? requestType : "-" }</p>
+                    <span>Description</span>
+                    <p>{ comment ? comment : "-" }</p>
                 </div>
             </div>
             <div className="arrows">
