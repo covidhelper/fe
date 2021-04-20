@@ -4,6 +4,8 @@ import App from './App';
 import './assets/scss/index.scss'
 import reportWebVitals from './reportWebVitals';
 
+console.log = function(){}
+
 ReactDOM.render(
   <App />,
   document.getElementById('root')

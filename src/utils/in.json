@@ -11,6 +11,28 @@
         "population_proper": "16753235"
     },
     {
+        "city": "Gurgaon",
+        "lat": "28.6600",
+        "lng": "77.2300",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Haryana",
+        "capital": "admin",
+        "population": "29617000",
+        "population_proper": "16753235"
+    },
+    {
+        "city": "Noida",
+        "lat": "28.6600",
+        "lng": "77.2300",
+        "country": "India",
+        "iso2": "IN",
+        "admin_name": "Uttar Pradesh",
+        "capital": "admin",
+        "population": "29617000",
+        "population_proper": "16753235"
+    },
+    {
         "city": "Mumbai",
         "lat": "18.9667",
         "lng": "72.8333",

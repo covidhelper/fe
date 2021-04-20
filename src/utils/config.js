@@ -1,5 +1,8 @@
 export const BASE_URL = "https://covid19helpers.in/"
 
+// Cities
+export const CITIES = BASE_URL + "v1/data/cities"
+
 // Data Upload
 export const FORM_FILL_UNSTRUCTURED = BASE_URL + "v1/data/unstructured" // POST
 export const FORM_FILL_STRUCTURED = BASE_URL + "v1/data/structured" // POST
