@@ -14,12 +14,12 @@ const LandingPage = () => {
                         There’s a flood of information available about the suppliers/providers/helpers on social media. We aim to curate a verifiable listing for bridging the gap between seekers and givers.
                     </div>
                     <div className="cta">
-                        <Link to="/get-help">
+                        <Link to="/get-info">
                             <button className="btn">
                                 Get Info
                             </button>
                         </Link>
-                        <Link to="/contribute">
+                        <Link to="/add-info">
                             <button className="btn">
                                 Add Info
                             </button>

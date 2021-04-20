@@ -83,8 +83,8 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
         if(isLink){
             navigator.clipboard.writeText(`${window.location.href}`)
         }
-        else if(window.location.pathname === "/contribute"){
-            navigator.clipboard.writeText(`${window.location.origin}/get-help/${uuid}`)
+        else if(window.location.pathname === "/add-info"){
+            navigator.clipboard.writeText(`${window.location.origin}/get-info/${uuid}`)
         }
         else{
             navigator.clipboard.writeText(`${window.location.href}/${uuid}`)

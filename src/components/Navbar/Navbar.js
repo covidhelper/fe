@@ -23,11 +23,11 @@ const Navbar = () => {
                 <li className={`nav-li ${location.pathname === "/" ? ' active' : null}`}>
                     <Link to="/">Home</Link>
                 </li>
-                <li className={`nav-li ${location.pathname === "/get-help" ? ' active' : null}`}>
-                    <Link to="/get-help">Get Info</Link>
+                <li className={`nav-li ${location.pathname === "/get-info" ? ' active' : null}`}>
+                    <Link to="/get-info">Get Info</Link>
                 </li>
-                <li className={`nav-li ${location.pathname === "/contribute" ? ' active' : null}`}>
-                    <Link to="/contribute">Add Info</Link>
+                <li className={`nav-li ${location.pathname === "/add-info" ? ' active' : null}`}>
+                    <Link to="/add-info">Add Info</Link>
                 </li>
             </ul>
         </nav>

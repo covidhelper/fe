@@ -1,6 +1,6 @@
 import { CircularProgress } from '@material-ui/core';
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
 
@@ -19,9 +19,11 @@ const App = () => {
       >
         <Navbar />
         <Switch>
-          <Route exact path="/get-help" component={Seek} />
-          <Route exact path="/get-help/:uuid" component={Seek} />
-          <Route exact path="/contribute" component={Contribute} />
+          <Redirect exact from="/get-help" to="/get-info" />
+          <Redirect exact from="/get-help/:uuid" to="/get-info/:uuid" />
+          <Route exact path="/get-info" component={Seek} />
+          <Route exact path="/get-info/:uuid" component={Seek} />
+          <Route exact path="/add-info" component={Contribute} />
           <Route path="/" component={LandingPage} />
         </Switch>
         <Footer />
