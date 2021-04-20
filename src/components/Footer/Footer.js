@@ -17,13 +17,13 @@ const Footer = () => {
                         <div className="icon">
                             <GitHub />
                         </div>
-                        <a href="https://github.com/covidhelper/fe">/covidhelper/fe</a>
+                        <a href="https://github.com/covidhelper/fe" target="_blank">/covidhelper/fe</a>
                     </div>
                     <div className="block">
                         <div className="icon">
                             <GitHub />
                         </div>
-                        <a href="https://github.com/covidhelper/curatedListBe">/covidhelper/curatedListBe</a>
+                        <a href="https://github.com/covidhelper/curatedListBe" target="_blank">/covidhelper/curatedListBe</a>
                     </div>
                 </div>
             </footer>
