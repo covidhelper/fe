@@ -31,7 +31,7 @@ const Seek = () => {
         type: '',
         query: ''
     })
-    const [seeker, setSeeker] = useState(true)
+    const [seeker, setSeeker] = useState(false)
     const [cards, setCards] = useState(null)
     const [alert, setAlert] = useState({
         isOpen: false,
@@ -125,8 +125,8 @@ const Seek = () => {
                     uuid === undefined ?
                     <>
                         <div className="tabs">
-                            <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seeker</span>
                             <span onClick={() => setSeeker(false)} className={!seeker ? 'active' : null}>Giver</span>
+                            <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seeker</span>
                         </div>
                         <div className="params">
                             <State onStateChange={value => setParams({ ...params, state: value })}/>
@@ -166,15 +166,15 @@ const Seek = () => {
                 {
                     uuid === undefined ?
                     (
-                        seeker ?
+                        !seeker ?
                         cards && cards.map((c, ind) => {
                             return (
-                                !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         }) :
                         cards && cards.map((c, ind) => {
                             return (
-                                c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
+                                !c.isGiver && <Card isLink={uuid === undefined ? false: true} key={ind} {...c} updateCard={updateCard} />
                             )
                         })
                     ) : null

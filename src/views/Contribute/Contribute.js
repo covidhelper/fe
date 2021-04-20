@@ -1,10 +1,8 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core'
-import { Add } from '@material-ui/icons'
 import React, { useEffect, useState } from 'react'
 import CustomAlert from '../../components/CustomAlert/CustomAlert'
 import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
-import State from '../../components/Dropdowns/State'
 import service from '../../utils/axiosConfig'
 import { FORM_FILL_STRUCTURED } from '../../utils/config'
 
@@ -18,6 +16,7 @@ const Contribute = () => {
     const [formData, setFormData] = useState({
         name: '',
         city: '',
+        newCity: '',
         state: '',
         email: '',
         contacts: [{ phone: '', contactPerson: '' }],
@@ -68,10 +67,6 @@ const Contribute = () => {
         })
     }
 
-    const onFileUpload = e => {
-        e.preventDefault()
-    }
-
     const onFormSubmit = e => {
         e.preventDefault()
         const payload = {
@@ -97,18 +92,6 @@ const Contribute = () => {
                         type: 'error'
                     })
                 }
-                setFormData({
-                    name: '',
-                    city: '',
-                    state: '',
-                    email: '',
-                    contacts: [{ phone: '', contactPerson: '' }],
-                    address: '',
-                    requestType: '',
-                    comment: '',
-                    isGiver: 'giver'
-                })
-                sessionStorage.setItem("userId", res.data.response.userId)
             }
             else{
                 setAlert({
@@ -121,6 +104,17 @@ const Contribute = () => {
         })
         .catch(err => {
             console.log(err);
+        })
+        .finally(() => {
+            setFormData({
+                ...formData,
+                name: '',
+                newCity: '',
+                email: '',
+                contacts: [{ phone: '', contactPerson: '' }],
+                address: '',
+                comment: '',
+            })
         })
     }
 
@@ -167,10 +161,16 @@ const Contribute = () => {
                                 />
                             </div>
                             <div className="block">
-                                <State onStateChange={value => setFormData({ ...formData, state: value })}/>
+                                <City onCityChange={value => setFormData({ ...formData, city: value })}/>
                             </div>
                             <div className="block">
-                                <City onCityChange={value => setFormData({ ...formData, city: value })}/>
+                                <TextField 
+                                    label="Enter city name if not in dropdown"
+                                    id="newCity"
+                                    value={formData.newCity}
+                                    onChange={onFormDataChange} 
+                                    type="text"
+                                />
                             </div>
                             <div className="block">
                                 <TextField 
@@ -192,18 +192,6 @@ const Contribute = () => {
                                 />
                             </div>
                             <div className="block">
-                                <TextField 
-                                    label="Comment"
-                                    id="comment"
-                                    multiline
-                                    rows={4}
-                                    value={formData.comment}
-                                    onChange={onFormDataChange} 
-                                    type="text"
-                                    variant="outlined"
-                                />
-                            </div>
-                            <div className="block">
                                 <FormControl>
                                     <InputLabel id="giver-label">Giver / Seeker</InputLabel>
                                     <Select
@@ -216,6 +204,18 @@ const Contribute = () => {
                                         <MenuItem value="seeker">Seeker</MenuItem>
                                     </Select>
                                 </FormControl>
+                            </div>
+                            <div className="block">
+                                <TextField 
+                                    label="Comment"
+                                    id="comment"
+                                    multiline
+                                    rows={4}
+                                    value={formData.comment}
+                                    onChange={onFormDataChange} 
+                                    type="text"
+                                    variant="outlined"
+                                />
                             </div>
                             {
                                 formData.contacts.map((c, ind) => {
@@ -249,11 +249,6 @@ const Contribute = () => {
                     </div> :
                     <div className="fill-form">
                         <p>This feature is currently under construction. Thank you for your patience.</p>
-                        {/* <form onSubmit={onFileUpload}>
-                            <div>
-                                <button type="submit" className="btn">Submit</button>
-                            </div>
-                        </form> */}
                     </div>
                 }
             </div>

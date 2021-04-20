@@ -1,14 +1,25 @@
-import { Menu } from '@material-ui/core'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
     const location = useLocation()
+    const [showMenu, setShowMenu] = useState(false)
+
+    useEffect(() => {
+        if(showMenu){
+            setShowMenu(false)
+        }
+    }, [location.pathname])
 
     return (
         <nav>
-            <div className="logo">COVID Helpers</div>
-            <ul className="nav-ul">
+            <div className="logo">COVID19 Helpers</div>
+            <div className="ham" onClick={() => setShowMenu(prevState => !prevState)}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul className={`nav-ul ${showMenu ? '' : 'hide'}`}>
                 <li className={`nav-li ${location.pathname === "/" ? ' active' : null}`}>
                     <Link to="/">Home</Link>
                 </li>

@@ -43,6 +43,11 @@ button {
     background-color: $dark-blue;
     color: $white;
   }
+
+  @media (max-width: 767px) {
+    font-size: 1.2rem;
+    padding: 0.5em 1.5em;
+  }
 }
 
 .tabs {
@@ -60,6 +65,10 @@ button {
     border-radius: 10px;
     cursor: pointer;
     transition: all 250ms ease-in-out;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+    }
   }
 
   > span.active {
@@ -159,6 +168,32 @@ nav {
   .logo {
     font-size: 1.8rem;
     color: $white;
+
+    @media (max-width: 767px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .ham {
+    display: none;
+
+    > span {
+      width: 30px;
+      height: 4px;
+      border-radius: 10px;
+      background-color: $white;
+    }
+
+    > span + span {
+      margin-top: 4px;
+    }
+
+    @media (max-width: 767px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
   }
 
   .nav-ul {
@@ -166,6 +201,7 @@ nav {
     list-style-type: none;
     justify-content: center;
     align-items: center;
+    transition: opacity 250ms ease-in-out;
 
     .nav-li {
       margin-left: 2em;
@@ -191,10 +227,37 @@ nav {
       &:hover::before {
         transform: scaleX(1);
       }
+
+      @media (max-width: 767px) {
+        margin: 0;
+        padding: 1em 2em;
+
+        &::before {
+          bottom: 6px;
+        }
+      }
     }
 
     .active::before {
       transform: scaleX(1);
+    }
+
+    @media (max-width: 767px) {
+      position: absolute;
+      flex-direction: column;
+      width: 200px;
+      left: calc(100% - 100px);
+      top: 100%;
+      transform: translateX(-50%);
+      background-color: $dark-blue;
+    }
+  }
+
+  .nav-ul.hide {
+    display: none;
+
+    @media (min-width: 767px) {
+      display: flex;
     }
   }
 
@@ -208,6 +271,10 @@ nav {
 
   @media (max-width: 1120px) {
     padding: 1em 2em;
+  }
+
+  @media (max-width: 767px) {
+    padding: 1em;
   }
 }
 
@@ -230,12 +297,20 @@ nav {
       color: $text-blue;
       font-size: 2.5rem;
       font-weight: bold;
+
+      @media (max-width: 767px) {
+        font-size: 2rem;
+      }
     }
 
     .sub-heading {
       color: $text-blue;
       font-size: 1.5rem;
       margin-top: 1em;
+
+      @media (max-width: 767px) {
+        font-size: 1.2rem;
+      }
     }
 
     .cta {
@@ -247,12 +322,24 @@ nav {
         margin-left: 1em;
       }
     }
+    @media (max-width: 767px) {
+      max-width: 60ch;
+    }
   }
 
   .image {
     img {
       width: 600px;
       height: 600px;
+
+      @media (max-width: 767px) {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+    @media (max-width: 767px) {
+      margin: 1em 0;
+      width: 320px;
     }
   }
 
@@ -264,7 +351,7 @@ nav {
 .footer-wrapper {
   width: 100%;
   background-color: $dark-blue;
-  padding: 4em 5em;
+  padding: 3em 5em;
 
   footer {
     display: flex;
@@ -299,22 +386,40 @@ nav {
   @media (max-width: 1120px) {
     padding: 4em 2em;
   }
+
+  @media (max-width: 767px) {
+    padding: 2em 1em;
+  }
 }
 
 .card-wrapper {
   margin-top: 1em;
   .params {
     margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+
+    > * {
+      flex: 1 1 35%;
+    }
+
     > .MuiFormControl-root {
-      width: 250px;
+      max-width: 250px;
     }
 
     > .MuiFormControl-root + .MuiFormControl-root {
-      margin-left: 2em;
+      @media (max-width: 767px) {
+        margin-left: 0;
+      }
     }
 
     .searchbar {
-      width: 400px;
+      max-width: 400px;
+
+      @media (max-width: 767px) {
+        width: 320px;
+      }
     }
   }
 }
@@ -329,19 +434,28 @@ nav {
 
   .upperRow {
     display: flex;
+    flex-wrap: wrap;
     .content-wrapper {
       flex: 1 1 80%;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      display: flex;
+      gap: 0.5em;
+      flex-wrap: wrap;
 
       .block {
+        flex: 1 1 25%;
         color: $dark-blue;
         span {
           font-size: 0.8rem;
+          @media (max-width: 767px) {
+            font-size: 0.6rem;
+          }
         }
 
         p {
           font-size: 1.2rem;
+          @media (max-width: 767px) {
+            font-size: 1rem;
+          }
         }
         margin: 0.5em 0;
       }
@@ -360,6 +474,12 @@ nav {
         .review {
           place-self: center;
           margin-top: 1em;
+
+          button {
+            @media (max-width: 767px) {
+              font-size: 0.8rem;
+            }
+          }
         }
 
         .share {
@@ -373,23 +493,28 @@ nav {
             padding: 0.5em 1em;
             border-radius: 5px;
 
+            svg {
+              @media (max-width: 767px) {
+                font-size: 0.8rem;
+              }
+            }
+
             span {
               margin-left: 0.2em;
             }
+
+            @media (max-width: 767px) {
+              font-size: 0.8rem;
+            }
           }
         }
-      }
 
-      .email {
-        width: 100%;
-        place-content: center;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        svg {
-          font-size: 30px;
-          color: orange;
-          margin-right: 0.6em;
+        @media (max-width: 767px) {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 1em;
+          border-top: 2px solid $dark-blue;
         }
       }
     }
@@ -400,17 +525,20 @@ nav {
     border-top: 2px solid $dark-blue;
     padding: 1em 0 0;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
 
     .btn {
+      flex: 1 1 20%;
       font-size: 1.1rem;
-      padding: 0.4em 1em;
+      padding: 0.5em 1em;
       border: 2px solid $dark-blue;
       border-radius: 5px;
-    }
 
-    .btn + .btn {
-      margin-left: 2em;
+      @media (max-width: 767px) {
+        font-size: 0.8rem;
+        padding: 0.4em 0.5em;
+      }
     }
   }
 }
@@ -435,13 +563,14 @@ nav {
     border-radius: 10px;
     padding: 1em 2em;
     margin-top: 1em;
+
     p {
       font-size: 1.2rem;
-      margin-top: 1em;
+      margin: 1em 0;
     }
+
     form {
       margin-top: 1em;
-
       display: flex;
       gap: 1em;
       flex-wrap: wrap;
@@ -461,19 +590,38 @@ nav {
         > div {
           flex: 1 1 48%;
         }
+
+        @media (max-width: 767px) {
+          flex-direction: column;
+        }
       }
 
       .control-buttons {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 1.5em;
+        gap: 1em;
         width: 100%;
 
         button {
-          display: block;
-          margin: 1em auto 0;
+          width: 100% !important;
+        }
+
+        @media (max-width: 767px) {
+          flex-direction: column;
         }
       }
     }
+  }
+
+  @media (max-width: 767px) {
+    padding: 1em;
+  }
+}
+
+#newCity-label {
+  @media (max-width: 767px) {
+    top: -10px !important;
   }
 }
