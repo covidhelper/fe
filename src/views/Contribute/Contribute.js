@@ -68,10 +68,6 @@ const Contribute = () => {
         })
     }
 
-    const onFileUpload = e => {
-        e.preventDefault()
-    }
-
     const onFormSubmit = e => {
         e.preventDefault()
         const payload = {
@@ -249,11 +245,6 @@ const Contribute = () => {
                     </div> :
                     <div className="fill-form">
                         <p>This feature is currently under construction. Thank you for your patience.</p>
-                        {/* <form onSubmit={onFileUpload}>
-                            <div>
-                                <button type="submit" className="btn">Submit</button>
-                            </div>
-                        </form> */}
                     </div>
                 }
             </div>
