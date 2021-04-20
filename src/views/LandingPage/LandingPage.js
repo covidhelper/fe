@@ -16,12 +16,12 @@ const LandingPage = () => {
                     <div className="cta">
                         <Link to="/get-help">
                             <button className="btn">
-                                Get Help
+                                Get Info
                             </button>
                         </Link>
                         <Link to="/contribute">
                             <button className="btn">
-                                Contribute
+                                Add Info
                             </button>
                         </Link>
                     </div>
