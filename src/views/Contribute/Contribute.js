@@ -289,7 +289,7 @@ const Contribute = () => {
                     <div className="card-preview">
                         <span>Data Preview</span>
                         {
-                            cardData.uuid ?
+                            cardData && cardData.uuid ?
                             <Card isLink={false} { ...cardData } showUpdate={false} updateCard={() => console.log("Hello")} />
                             : null
                         }
