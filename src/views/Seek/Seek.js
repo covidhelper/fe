@@ -36,32 +36,12 @@ const Seek = () => {
 
     useEffect(() => {
         console.log(uuid);
-        setLoading(true)
         if(uuid !== undefined){
+            setLoading(true)
             service.get(`${FORM_FILL_STRUCTURED}/${uuid}`)
             .then(res => {
                 if(res.data.success){
                     setCards([res.data.response.dataCard])
-                }
-                else{
-                    setAlert({
-                        ...alert,
-                        isOpen: true,
-                        message: res.data.message,
-                        type: 'error'
-                    })
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            .finally(() => setLoading(false))
-        }
-        else{
-            service.get(`${FORM_FILL_STRUCTURED}`)
-            .then(res => {
-                if(res.data.success){
-                    setCards(res.data.response.dataCards)
                 }
                 else{
                     setAlert({
@@ -134,6 +114,7 @@ const Seek = () => {
     return (
         <div className="layout-wrapper">
             <div className="card-wrapper">
+                
                 {
                     uuid === undefined ?
                     <>
@@ -142,6 +123,12 @@ const Seek = () => {
                             <span onClick={() => setSeeker(false)} className={!seeker ? 'active' : null}>Providing Help</span>
                             <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Need Help</span>
                         </div>
+                        {
+                            !cards || cards.length === 0 ? 
+                            <div className="tell">
+                                <p>Please select your city / requirement from the dropdown or search to get the data.</p>
+                            </div> : null
+                        }
                         <div className="params">
                             <City onCityChange={value => setParams({ ...params, city: value })}/>
                             <ReqType onTypeChange={value => setParams({ ...params, type: value })} />
@@ -161,13 +148,13 @@ const Seek = () => {
                         </div>
                     </> :
                     <>
-                    {
-                        cards && cards.map((c, ind) => {
-                            return (
-                                <Card isLink={uuid !== undefined} key={ind} {...c} updateCard={updateCard} />
-                            )
-                        })
-                    }
+                        {
+                            cards && cards.map((c, ind) => {
+                                return (
+                                    <Card isLink={uuid !== undefined} key={ind} {...c} updateCard={updateCard} />
+                                )
+                            })
+                        }
                     </>
                 }
                 {
