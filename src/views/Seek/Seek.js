@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router'
 import Card from '../../components/Card/Card'
 import CustomAlert from '../../components/CustomAlert/CustomAlert'
+import AutocompleteCity from '../../components/Dropdowns/AutocompleteCity'
 import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
 import service from '../../utils/axiosConfig'
@@ -130,7 +131,8 @@ const Seek = () => {
                             </div> : null
                         }
                         <div className="params">
-                            <City onCityChange={value => setParams({ ...params, city: value })}/>
+                            {/* <City onCityChange={value => setParams({ ...params, city: value })}/> */}
+                            <AutocompleteCity changeValue={value => setParams({ ...params, city: value })} />
                             <ReqType onTypeChange={value => setParams({ ...params, type: value })} />
                             <FormControl className="searchbar">
                                 <InputLabel htmlFor="query">Search by at least 3 characters</InputLabel>

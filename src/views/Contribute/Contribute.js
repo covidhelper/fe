@@ -2,6 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-
 import React, { useEffect, useState } from 'react'
 import Card from '../../components/Card/Card'
 import CustomAlert from '../../components/CustomAlert/CustomAlert'
+import AutocompleteCity from '../../components/Dropdowns/AutocompleteCity'
 import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
 import service from '../../utils/axiosConfig'
@@ -193,7 +194,7 @@ const Contribute = () => {
                                 />
                             </div>
                             <div className="block">
-                                <City onCityChange={value => setFormData({ ...formData, city: value })}/>
+                                <AutocompleteCity changeValue={value => setFormData({ ...formData, city: value })} />
                             </div>
                             <div className="block">
                                 <TextField 
@@ -293,7 +294,9 @@ const Contribute = () => {
                             <Card isLink={false} { ...cardData } updateCard={value => setCardData(value)} />
                             : null
                         }
-                        <button className="btn" onClick={discardData} >Discard</button>
+                        <div className="center">
+                            <button className="btn" onClick={discardData} >Delete Data</button>
+                        </div>
                     </div> : null
                 }
             </div>
