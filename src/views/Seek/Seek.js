@@ -124,7 +124,7 @@ const Seek = () => {
                     <>
                         <div className="tabs">
                             <span onClick={() => setSeeker(false)} className={!seeker ? 'active' : null}>Suppliers</span>
-                            <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seekers</span>
+                            {/* <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seekers</span> */}
                         </div>
                         <div className="params">
                             <City onCityChange={value => setParams({ ...params, city: value })}/>
