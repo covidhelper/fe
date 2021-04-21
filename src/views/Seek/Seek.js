@@ -8,6 +8,7 @@ import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
 import service from '../../utils/axiosConfig'
 import { FORM_FILL_STRUCTURED } from '../../utils/config'
+import Contribute from '../Contribute/Contribute'
 
 const Seek = () => {
     const history = useHistory()
@@ -79,8 +80,9 @@ const Seek = () => {
     }, [])
 
     useEffect(() => {
-        setLoading(true)
-        service.get(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
+        if(uuid === undefined){
+            setLoading(true)
+            service.get(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
             .then(res => {
                 console.log(res);
                 if(res.data.success){
@@ -99,6 +101,7 @@ const Seek = () => {
                 console.log(err);
             })
             .finally(() => setLoading(false))
+        }
     }, [params])
 
     const updateCard = data => {
@@ -123,7 +126,8 @@ const Seek = () => {
                     uuid === undefined ?
                     <>
                         <div className="tabs">
-                            <span onClick={() => setSeeker(false)} className={!seeker ? 'active' : null}>Suppliers</span>
+                            <p>There’s a flood of information available about the suppliers/providers/helpers on social media. We aim to create a verifiable listing for bridging the gap between seekers and givers.</p>
+                            {/* <span onClick={() => setSeeker(false)} className={!seeker ? 'active' : null}>Suppliers</span> */}
                             {/* <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seekers</span> */}
                         </div>
                         <div className="params">
@@ -185,11 +189,9 @@ const Seek = () => {
                     />
                 }
                 <div className="loop">
-                    <p>Did not get the data you were looking for?</p>
-                    <p>Become a supplier or a seeker, and get notified whenever new data is uploaded, as per your requirements.</p>
-                    <div>
-                        <button className="btn" onClick={onAddInfoClick}>Add Info</button>
-                    </div>
+                    <p>Do you have some data about trusted COVID suppliers?</p>
+                    <p>Fill in the form and help the community.</p>
+                    <Contribute />
                 </div>
             </div>
         </div>

@@ -152,12 +152,12 @@ const Contribute = () => {
     }
 
     return (
-        <div className="layout-wrapper">
+        <>
             <div className="contribute-container">
-                <div className="tabs">
+                {/* <div className="tabs">
                     <span onClick={() => setStructuredFormOpen(true)} className={structuredFormOpen ? 'active' : null}>Add Info</span>
                     <span onClick={() => setStructuredFormOpen(false)} className={!structuredFormOpen ? 'active' : null}>Upload File</span>
-                </div>
+                </div> */}
                 {
                     structuredFormOpen ?
                     <div className="fill-form">
@@ -305,7 +305,7 @@ const Contribute = () => {
                     type={alert.type}
                 />
             }
-        </div>
+        </>
     )
 }
 

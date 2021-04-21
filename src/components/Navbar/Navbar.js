@@ -14,7 +14,7 @@ const Navbar = () => {
     return (
         <nav>
             <div className="logo">COVID19 Helpers</div>
-            <div className="ham" onClick={() => setShowMenu(prevState => !prevState)}>
+            {/* <div className="ham" onClick={() => setShowMenu(prevState => !prevState)}>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -29,7 +29,7 @@ const Navbar = () => {
                 <li className={`nav-li ${location.pathname === "/add-info" ? ' active' : null}`}>
                     <Link to="/add-info">Add Info</Link>
                 </li>
-            </ul>
+            </ul> */}
         </nav>
     )
 }

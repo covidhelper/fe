@@ -21,6 +21,7 @@ const App = () => {
         <Switch>
           <Redirect exact from="/get-help" to="/get-info" />
           <Redirect exact from="/get-help/:uuid" to="/get-info/:uuid" />
+          <Redirect exact from="/" to="/get-info" />
           <Route exact path="/get-info" component={Seek} />
           <Route exact path="/get-info/:uuid" component={Seek} />
           <Route exact path="/add-info" component={Contribute} />

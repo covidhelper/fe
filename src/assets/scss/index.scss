@@ -56,6 +56,14 @@ button {
   align-items: center;
   gap: 1em;
 
+  > p {
+    font-size: 1.5rem;
+
+    @media (max-width: 767px) {
+      font-size: 1.2rem;
+    }
+  }
+
   > span {
     width: 100%;
     padding: 0.8em;
@@ -397,6 +405,7 @@ nav {
 
 .card-wrapper {
   margin-top: 1em;
+  // overflow-x: hidden;
   .params {
     margin-top: 2em;
     display: flex;
@@ -428,9 +437,8 @@ nav {
 
   .loop {
     margin-top: 2em;
-    border: 2px solid $dark-blue;
-    border-radius: 10px;
-    padding: 2em;
+    padding-top: 2em;
+    border-top: 2px solid $dark-blue;
     > p:first-child {
       font-size: 1.5rem;
     }
@@ -442,7 +450,7 @@ nav {
 
     > div {
       width: 100%;
-      text-align: center;
+      // text-align: center;
     }
   }
 }
@@ -458,6 +466,7 @@ nav {
   .upperRow {
     display: flex;
     flex-wrap: wrap;
+    overflow-wrap: break-word;
     .content-wrapper {
       flex: 1 1 80%;
       display: flex;
@@ -476,6 +485,7 @@ nav {
 
         p {
           font-size: 1.2rem;
+          max-width: 20ch;
           @media (max-width: 767px) {
             font-size: 1rem;
           }
@@ -579,7 +589,7 @@ nav {
 
 .contribute-container {
   width: 100%;
-  padding: 1em 5em;
+  // padding: 1em 5em;
 
   .fill-form {
     border: 2px solid $dark-blue;
@@ -636,10 +646,6 @@ nav {
         }
       }
     }
-  }
-
-  @media (max-width: 767px) {
-    padding: 1em;
   }
 }
 
