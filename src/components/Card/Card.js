@@ -34,8 +34,8 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
         }
     }, [openComments])
 
-    const getDateString = () => {
-        return new Date(lastReported)
+    const getDateString = value => {
+        return new Date(value)
     }
 
     const onVerifySubmit = e => {
@@ -130,7 +130,7 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
                 </div>
                 <div className="block">
                     <span>Date Created</span>
-                    <p>{ createdDate ? `${formatString(getDateString().getDate())}/${formatString(getDateString().getMonth()+1)}/${getDateString().getFullYear()}` : "-" }</p>
+                    <p>{ createdDate ? `${formatString(getDateString(createdDate).getDate())}/${formatString(getDateString(createdDate).getMonth()+1)}/${getDateString(createdDate).getFullYear()}` : "-" }</p>
                 </div>
             </div>
             <div className="arrows">
@@ -171,7 +171,7 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
             <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
             {
                 action && lastReported ?
-                <button onClick={e => e.preventDefault()} className="btn">{`Last Reported: ${action}, Date: ${formatString(getDateString().getDate())}/${formatString(getDateString().getMonth()+1)}/${getDateString().getFullYear()}, Time: ${formatString(getDateString().getHours())}:${formatString(getDateString().getMinutes())}`}</button> : null
+                <button onClick={e => e.preventDefault()} className="btn">{`Last Reported: ${action}, Date: ${formatString(getDateString(lastReported).getDate())}/${formatString(getDateString(lastReported).getMonth()+1)}/${getDateString(lastReported).getFullYear()}, Time: ${formatString(getDateString().getHours())}:${formatString(getDateString().getMinutes())}`}</button> : null
             }
         </div>
         {
