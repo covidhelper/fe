@@ -7,7 +7,7 @@ import { formatString } from '../../utils/formatString';
 import CustomAlert from '../CustomAlert/CustomAlert';
 import Modal from './Modal';
 
-const Card = ({ name, email, phone, comment, city, requestType, address, uuid, rating, totalCount, isLink, updateCard, action, lastReported }) => {
+const Card = ({ name, email, phone, comment, city, requestType, address, uuid, rating, totalCount, createdDate, isLink, updateCard, action, lastReported }) => {
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
@@ -127,6 +127,10 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
                 <div className="block">
                     <span>Description</span>
                     <p>{ comment ? comment : "-" }</p>
+                </div>
+                <div className="block">
+                    <span>Date Created</span>
+                    <p>{ createdDate ? `${formatString(getDateString().getDate())}/${formatString(getDateString().getMonth()+1)}/${getDateString().getFullYear()}` : "-" }</p>
                 </div>
             </div>
             <div className="arrows">
