@@ -81,7 +81,9 @@ const Seek = () => {
 
     useEffect(() => {
         if(uuid === undefined){
-            getData()
+            if(!(params.type === "" && params.city === "")){
+                getData()
+            }
         }
     }, [params.type, params.city])
 
