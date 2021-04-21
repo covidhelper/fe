@@ -56,14 +56,6 @@ button {
   align-items: center;
   gap: 1em;
 
-  > p {
-    font-size: 1.5rem;
-
-    @media (max-width: 767px) {
-      font-size: 1.2rem;
-    }
-  }
-
   > span {
     width: 100%;
     padding: 0.8em;
@@ -82,6 +74,15 @@ button {
   > span.active {
     background-color: $dark-blue;
     color: $white;
+  }
+}
+
+.highlight {
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+
+  @media (max-width: 767px) {
+    font-size: 1.2rem;
   }
 }
 

@@ -18,13 +18,12 @@ const Contribute = () => {
         name: '',
         city: '',
         newCity: '',
-        state: '',
         email: '',
         contacts: [{ phone: '', contactPerson: '' }],
         address: '',
         requestType: '',
         comment: '',
-        isGiver: 'giver'
+        isGiver: ''
     })
     const [showCard, setShowCard] = useState(false)
     const [cardData, setCardData] = useState(null)
@@ -226,15 +225,16 @@ const Contribute = () => {
                             </div>
                             <div className="block">
                                 <FormControl>
-                                    <InputLabel id="giver-label">Giver / Seeker</InputLabel>
+                                    <InputLabel id="giver-label" required>Providing Help / Need Help ?</InputLabel>
                                     <Select
+                                        required
                                         labelId="giver-label"
                                         id="isGiver"
                                         value={formData.isGiver}
                                         onChange={e => setFormData({ ...formData, isGiver: e.target.value })}
                                     >
-                                        <MenuItem value="giver">Giver</MenuItem>
-                                        <MenuItem value="seeker">Seeker</MenuItem>
+                                        <MenuItem value="giver">I Am Providing Help</MenuItem>
+                                        <MenuItem value="seeker">I Need Help</MenuItem>
                                     </Select>
                                 </FormControl>
                             </div>

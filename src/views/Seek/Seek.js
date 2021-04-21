@@ -81,28 +81,38 @@ const Seek = () => {
 
     useEffect(() => {
         if(uuid === undefined){
-            setLoading(true)
-            service.get(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
-            .then(res => {
-                console.log(res);
-                if(res.data.success){
-                    setCards(res.data.response.dataCards)
-                }
-                else{
-                    setAlert({
-                        ...alert,
-                        isOpen: true,
-                        message: 'Some error eoccured in fetching the data',
-                        type: 'error'
-                    })
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-            .finally(() => setLoading(false))
+            getData()
         }
-    }, [params])
+    }, [params.type, params.city])
+
+    useEffect(() => {
+        if(params.query.length >= 3){
+            getData()
+        }
+    }, [params.query])
+
+    const getData = () => {
+        setLoading(true)
+        service.get(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
+        .then(res => {
+            console.log(res);
+            if(res.data.success){
+                setCards(res.data.response.dataCards)
+            }
+            else{
+                setAlert({
+                    ...alert,
+                    isOpen: true,
+                    message: 'Some error eoccured in fetching the data',
+                    type: 'error'
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        .finally(() => setLoading(false))
+    }
 
     const updateCard = data => {
         const id = data.uuid
@@ -125,16 +135,16 @@ const Seek = () => {
                 {
                     uuid === undefined ?
                     <>
+                        <p className="highlight">There’s a flood of information available about the suppliers/providers/helpers on social media. We aim to create a verifiable listing for bridging the gap between seekers and givers.</p>
                         <div className="tabs">
-                            <p>There’s a flood of information available about the suppliers/providers/helpers on social media. We aim to create a verifiable listing for bridging the gap between seekers and givers.</p>
-                            {/* <span onClick={() => setSeeker(false)} className={!seeker ? 'active' : null}>Suppliers</span> */}
-                            {/* <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Seekers</span> */}
+                            <span onClick={() => setSeeker(false)} className={!seeker ? 'active' : null}>Providing Help</span>
+                            <span onClick={() => setSeeker(true)} className={seeker ? 'active' : null}>Need Help</span>
                         </div>
                         <div className="params">
                             <City onCityChange={value => setParams({ ...params, city: value })}/>
                             <ReqType onTypeChange={value => setParams({ ...params, type: value })} />
                             <FormControl className="searchbar">
-                                <InputLabel htmlFor="query">Search</InputLabel>
+                                <InputLabel htmlFor="query">Search by at least 3 characters</InputLabel>
                                 <Input
                                     id="query"
                                     value={params.query}
