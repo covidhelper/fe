@@ -1,0 +1,271 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import "./variables.scss";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1800px;
+  font-family: "Lato", sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $dark-blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 5em;
+
+  .logo {
+    font-size: 1.8rem;
+    color: $white;
+  }
+
+  .nav-ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+
+    .nav-li {
+      margin-left: 2em;
+      font-size: 1.2rem;
+      color: $white;
+      cursor: pointer;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: -10px;
+        width: 100%;
+        height: 4px;
+        background-color: $white;
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 250ms ease-in-out;
+      }
+
+      &:hover::before {
+        transform: scaleX(1);
+      }
+    }
+
+    .active::before {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (max-width: 1120px) {
+    padding: 1em 2em;
+  }
+}
+
+.layout-wrapper {
+  padding: 1em 5em;
+
+  @media (max-width: 1120px) {
+    padding: 1em 1em;
+  }
+}
+
+.landing-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .content {
+    max-width: 80ch;
+    .heading {
+      color: $text-blue;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .sub-heading {
+      color: $text-blue;
+      font-size: 1.5rem;
+      margin-top: 1em;
+    }
+
+    .cta {
+      width: 100%;
+      text-align: center;
+      margin: 2em 0;
+
+      .btn {
+        outline: none;
+        border: none;
+        background-color: $white;
+        border: 2px solid $dark-blue;
+        color: $dark-blue;
+        padding: 0.6em 2em;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 250ms ease-in-out;
+
+        &:hover,
+        &:focus {
+          outline: none;
+          background-color: $dark-blue;
+          color: $white;
+        }
+      }
+
+      .btn + .btn {
+        margin-left: 1em;
+      }
+    }
+  }
+
+  .image {
+    img {
+      width: 600px;
+      height: 600px;
+    }
+  }
+
+  @media (max-width: 1120px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.footer-wrapper {
+  width: 100%;
+  background-color: $dark-blue;
+  padding: 4em 5em;
+
+  footer {
+    display: flex;
+    gap: 2em;
+    color: $white;
+
+    .about {
+      flex: 1 1 70%;
+
+      > p:first-child {
+        font-size: 1.5rem;
+      }
+
+      > p:nth-child(2) {
+        margin-top: 1em;
+        font-size: 1.2rem;
+      }
+    }
+
+    .contact {
+      flex: 1 1 30%;
+
+      > p:first-child {
+        font-size: 1.5rem;
+      }
+
+      .block {
+        margin-top: 1em;
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+
+        .icon {
+          padding-top: 0.4em;
+        }
+
+        a,
+        span {
+          margin-left: 1em;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1120px) {
+    padding: 4em 2em;
+  }
+}
+
+.card {
+  display: flex;
+  box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.2);
+  border-radius: 10px;
+  padding: 1em 2em;
+  margin: 2em 0;
+  .content-wrapper {
+    flex: 1 1 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    .block {
+      color: $dark-blue;
+      span {
+        font-size: 0.8rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+      margin: 0.5em 0;
+    }
+  }
+
+  .arrows {
+    flex: 1 1 20%;
+
+    .vote {
+      display: flex;
+      place-content: center;
+      .upvote {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        svg {
+          font-size: 70px;
+          color: green;
+        }
+      }
+
+      .downvote {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        svg {
+          font-size: 70px;
+          color: red;
+        }
+      }
+    }
+
+    .email {
+      width: 100%;
+      place-content: center;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      svg {
+        font-size: 30px;
+        color: orange;
+        margin-right: 0.6em;
+      }
+    }
+  }
+}
