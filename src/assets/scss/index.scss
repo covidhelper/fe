@@ -688,10 +688,20 @@ nav {
   border: 2px solid $dark-blue;
   border-radius: 10px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+
+  > div:nth-child(2) {
+    margin-left: 1em;
+
+    > p:first-child {
+      margin-bottom: 0.5em;
+    }
+  }
 
   @media (max-width: 550px) {
     flex-direction: column;
+    padding: 1em;
+    text-align: center;
   }
 }
