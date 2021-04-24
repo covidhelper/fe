@@ -1,18 +1,16 @@
 import { CircularProgress, FormControl, Input, InputAdornment, InputLabel } from '@material-ui/core'
-import { Search } from '@material-ui/icons'
+import { ErrorOutline, Search } from '@material-ui/icons'
 import React, { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router'
+import { useParams } from 'react-router'
 import Card from '../../components/Card/Card'
 import CustomAlert from '../../components/CustomAlert/CustomAlert'
 import AutocompleteCity from '../../components/Dropdowns/AutocompleteCity'
-import City from '../../components/Dropdowns/City'
 import ReqType from '../../components/Dropdowns/ReqType'
 import service from '../../utils/axiosConfig'
 import { FORM_FILL_STRUCTURED } from '../../utils/config'
 import Contribute from '../Contribute/Contribute'
 
 const Seek = () => {
-    const history = useHistory()
     const [params, setParams] = useState({
         city: '',
         type: '',
@@ -20,6 +18,8 @@ const Seek = () => {
     })
     const [seeker, setSeeker] = useState(false)
     const [cards, setCards] = useState(null)
+    const [seekerCards, setSeekerCards] = useState(null)
+    const [giverCards, setGiverCards] = useState(null)
     const [alert, setAlert] = useState({
         isOpen: false,
         message: '',
@@ -66,7 +66,7 @@ const Seek = () => {
                 getData()
             }
         }
-    }, [params.type, params.city])
+    }, [params.type, params.city, seeker])
 
     useEffect(() => {
         if(params.query.length >= 3){
@@ -74,13 +74,31 @@ const Seek = () => {
         }
     }, [params.query])
 
+    useEffect(() => {
+        if(cards && cards.length){
+            const g = cards.filter(c => c.isGiver)
+            const s = cards.filter(c => !c.isGiver)
+            setGiverCards(g)
+            setSeekerCards(s)
+        }
+        else{
+            setGiverCards(null)
+            setSeekerCards(null)
+        }
+    }, [cards])
+
     const getData = () => {
         setLoading(true)
         service.get(`${FORM_FILL_STRUCTURED}?city=${params.city ? params.city : 'null' }&requestType=${params.type ? params.type : 'null'}&q=${params.query ? params.query : 'null'}&isSeeker=${seeker}`)
         .then(res => {
             console.log(res);
             if(res.data.success){
-                setCards(res.data.response.dataCards)
+                if(seeker){
+                    setSeekerCards(res.data.response.dataCards)
+                }
+                else{
+                    setGiverCards(res.data.response.dataCards)
+                }
             }
             else{
                 setAlert({
@@ -107,15 +125,9 @@ const Seek = () => {
         setCards(cardCopy)
     }
 
-    const onAddInfoClick = e => {
-        e.preventDefault()
-        history.push('/add-info')
-    }
-
     return (
         <div className="layout-wrapper">
             <div className="card-wrapper">
-                
                 {
                     uuid === undefined ?
                     <>
@@ -169,16 +181,42 @@ const Seek = () => {
                     uuid === undefined ?
                     (
                         !seeker ?
-                        cards && cards.map((c, ind) => {
-                            return (
-                                c.isGiver && <Card isLink={uuid !== undefined} key={ind} {...c} updateCard={updateCard} />
+                        (
+                            giverCards && giverCards.length ? 
+                            giverCards.map((c, ind) => {
+                                return (
+                                    c.isGiver && <Card isLink={uuid !== undefined} key={ind} {...c} updateCard={updateCard} />
+                                )
+                            }) : (
+                                <div className="sorry">
+                                    <div>
+                                        <ErrorOutline />
+                                    </div>
+                                    <div>
+                                        <p>No results found!</p>
+                                        <p>Please try changing the filters above to get results as per your need.</p>
+                                    </div>
+                                </div>
                             )
-                        }) :
-                        cards && cards.map((c, ind) => {
-                            return (
-                                !c.isGiver && <Card isLink={uuid !== undefined} key={ind} {...c} updateCard={updateCard} />
+                        ) :
+                        (
+                            seekerCards && seekerCards.length ?
+                            seekerCards.map((c, ind) => {
+                                return (
+                                    !c.isGiver && <Card isLink={uuid !== undefined} key={ind} {...c} updateCard={updateCard} />
+                                )
+                            }) : (
+                                <div className="sorry">
+                                    <div>
+                                        <ErrorOutline />
+                                    </div>
+                                    <div>
+                                        <p>No results found!</p>
+                                        <p>Please try changing the filters above to get results as per your need.</p>
+                                    </div>
+                                </div>
                             )
-                        })
+                        )
                     ) : null
                 }
                 {

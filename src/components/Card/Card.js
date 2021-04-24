@@ -171,7 +171,7 @@ const Card = ({ name, email, phone, comment, city, requestType, address, uuid, r
             <button name="Report" className="btn" onClick={onVerifySubmit}>Report</button>
             {
                 action && lastReported ?
-                <button onClick={e => e.preventDefault()} className="btn">{`Last Reported: ${action}, Date: ${formatString(getDateString(lastReported).getDate())}/${formatString(getDateString(lastReported).getMonth()+1)}/${getDateString(lastReported).getFullYear()}, Time: ${formatString(getDateString().getHours())}:${formatString(getDateString().getMinutes())}`}</button> : null
+                <button onClick={e => e.preventDefault()} className="btn">{`Last Reported: ${action}, Date: ${formatString(getDateString(lastReported).getDate())}/${formatString(getDateString(lastReported).getMonth()+1)}/${getDateString(lastReported).getFullYear()}, Time: ${formatString(getDateString(lastReported).getHours())}:${formatString(getDateString(lastReported).getMinutes())}`}</button> : null
             }
         </div>
         {
