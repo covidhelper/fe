@@ -1,21 +1,27 @@
-import { CircularProgress } from '@material-ui/core';
-import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
-import Footer from './components/Footer/Footer';
-import Navbar from './components/Navbar/Navbar';
+import { CircularProgress } from "@material-ui/core";
+import React, { lazy, Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar/Navbar";
 
-const Contribute = lazy(() => import('./views/Contribute/Contribute'));
-const LandingPage = lazy(() => import('./views/LandingPage/LandingPage'));
-const Seek = lazy(() => import('./views/Seek/Seek'));
+const Contribute = lazy(() => import("./views/Contribute/Contribute"));
+const LandingPage = lazy(() => import("./views/LandingPage/LandingPage"));
+const Seek = lazy(() => import("./views/Seek/Seek"));
 
 const App = () => {
   return (
     <Router>
-      <Suspense fallback={
-        <div className="loading">
-          <CircularProgress color="primary" />
-        </div>
-      }
+      <Suspense
+        fallback={
+          <div className="loading">
+            <CircularProgress color="primary" />
+          </div>
+        }
       >
         <Navbar />
         <Switch>
@@ -30,6 +36,6 @@ const App = () => {
       </Suspense>
     </Router>
   );
-}
+};
 
 export default App;
